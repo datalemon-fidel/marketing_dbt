@@ -47,4 +47,4 @@ WHERE
 GROUP BY
   hl.Date, FacebookAds_Cost, GoogleAds_Cost, TikTokAds_Cost, YouTubeAds_Cost
 ORDER BY
-  hl.Date;
+  hl.Date

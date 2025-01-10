@@ -32,4 +32,4 @@ WHERE
 GROUP BY
   hl.Date, YouTubeAds_Cost
 ORDER BY
-  hl.Date;
+  hl.Date

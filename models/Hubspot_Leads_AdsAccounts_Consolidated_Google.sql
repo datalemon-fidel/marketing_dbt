@@ -32,4 +32,4 @@ WHERE
 GROUP BY
   hl.Date, GoogleAds_Cost
 ORDER BY
-  hl.Date;
+  hl.Date

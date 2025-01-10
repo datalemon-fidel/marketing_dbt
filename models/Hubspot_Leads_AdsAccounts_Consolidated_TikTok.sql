@@ -32,4 +32,4 @@ WHERE
 GROUP BY
   hl.Date, TikTokAds_Cost
 ORDER BY
-  hl.Date;
+  hl.Date
