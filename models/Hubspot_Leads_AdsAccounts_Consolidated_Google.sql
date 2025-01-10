@@ -5,7 +5,6 @@
 
 SELECT
   hl.Date,
-  hl.Retained_Date,
   COUNT(CASE 
           WHEN (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') 
                AND LOWER(hl.Source_Traffic) NOT LIKE '%organic%' 
@@ -45,6 +44,6 @@ ON
 WHERE
   hl.Source_Traffic = 'Google' 
 GROUP BY
-  hl.Date, hl.Retained_Date, GoogleAds_Cost
+  hl.Date, GoogleAds_Cost
 ORDER BY
   hl.Date
