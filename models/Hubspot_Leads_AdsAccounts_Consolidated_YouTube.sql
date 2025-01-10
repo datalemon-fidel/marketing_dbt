@@ -1,9 +1,11 @@
+--hubspot_leads_ads_accounts_consolidated_youtube.sql
 {{ config(
     materialized='table'  
 ) }}
 
 SELECT
   hl.Date,
+  hl.Retained_Date,
   COUNT(CASE 
           WHEN (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') 
                AND LOWER(hl.Source_Traffic) NOT LIKE '%organic%' 
@@ -20,6 +22,19 @@ SELECT
                AND FORMAT_DATE('%Y-%m', hl.Retained_Date) = FORMAT_DATE('%Y-%m', hl.Date) 
           THEN 1 
         END) AS In_Period_Retained,
+  COUNT(CASE 
+          WHEN LOWER(hl.Source_Traffic) NOT LIKE '%organic%'
+               AND hl.Contact_lead_status = 'Retained' 
+               AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) <= 60 
+               AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) >= 0
+          THEN 1 
+        END) AS Rolling_Window_Retained,
+  COUNT(CASE
+          WHEN hl.Date >= DATE('2024-01-01')
+               AND LOWER(hl.Source_Traffic) NOT LIKE '%organic%'
+               AND hl.Contact_lead_status = 'Retained'
+          THEN 1
+        END) AS Retained_that_Month,
   IFNULL(ya.Total_Cost, 0) AS YouTubeAds_Cost
 FROM
   `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
@@ -30,6 +45,6 @@ ON
 WHERE
   hl.Source_Traffic = 'YouTube' 
 GROUP BY
-  hl.Date, YouTubeAds_Cost
+  hl.Date, hl.Retained_Date, YouTubeAds_Cost
 ORDER BY
-  hl.Date
+  hl.Date;
