@@ -46,4 +46,4 @@ WHERE
 GROUP BY
   hl.Date, FacebookAds_Cost
 ORDER BY
-  hl.Date;
+  hl.Date
