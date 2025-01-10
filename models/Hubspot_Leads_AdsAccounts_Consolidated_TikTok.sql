@@ -47,4 +47,4 @@ WHERE
 GROUP BY
   hl.Date, hl.Retained_Date, TikTokAds_Cost
 ORDER BY
-  hl.Date;
+  hl.Date
