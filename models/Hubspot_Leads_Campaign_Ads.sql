@@ -7,6 +7,7 @@
 WITH base_data AS (
   SELECT
     Date,
+    Source_Traffic,
     Source_Campaign, 
     Source_Ad,
     Source_Adset, 
@@ -43,7 +44,7 @@ WITH base_data AS (
           END) AS Rolling_365_Retained
   FROM
     `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` 
-  GROUP BY 1,2,3,4,5
+  GROUP BY 1,2,3,4,5,6
 )
 
 SELECT
