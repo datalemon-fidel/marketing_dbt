@@ -7,7 +7,13 @@
 WITH base_data AS (
   SELECT
     Date,
-    Source_Traffic,
+    CASE
+      WHEN LOWER(Source_Traffic) LIKE '%facebook%' THEN 'Facebook'
+      WHEN LOWER(Source_Traffic) LIKE '%tiktok%' THEN 'TikTok'
+      WHEN LOWER(Source_Traffic) LIKE '%youtube%' THEN 'YouTube'
+      WHEN LOWER(Source_Traffic) LIKE '%google%' THEN 'Google'
+      ELSE Source_Traffic
+    END AS Source_Traffic,
     Source_Campaign, 
     Source_Ad,
     Source_Adset, 
