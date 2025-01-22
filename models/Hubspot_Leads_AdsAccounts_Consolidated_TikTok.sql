@@ -46,9 +46,10 @@ base_data AS (
           END) AS In_Period_Retained,
     COUNT(CASE 
             WHEN LOWER(hl.Source_Traffic) NOT LIKE '%organic%'
+
                  AND hl.Contact_lead_status = 'Retained' 
-                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY, 'DAY') <= 60 
-                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY, 'DAY') >= 0
+                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) <= 60 
+                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) >= 0
             THEN 1 
           END) AS Rolling_Window_Retained,
     COUNT(CASE
@@ -74,7 +75,6 @@ base_data AS (
 
 SELECT
   *,
-
   -- Annual Metrics
   SUM(TikTokAds_Cost) 
     OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Ad_Spend,

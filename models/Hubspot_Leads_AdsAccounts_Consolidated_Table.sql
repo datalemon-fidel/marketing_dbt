@@ -4,33 +4,20 @@
     materialized='table'  
 ) }}
 
-WITH date_scaffold AS (
-  -- Determine the minimum and maximum dates from all tables
-  SELECT 
-    LEAST(
-      MIN(hl.Date), MIN(fa.Date), MIN(ga.Date), MIN(ta.Date), MIN(ya.Date)
-    ) AS start_date,
-    GREATEST(
-      MAX(hl.Date), MAX(fa.Date), MAX(ga.Date), MAX(ta.Date), MAX(ya.Date)
-    ) AS end_date
-  FROM 
-    `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
-  FULL OUTER JOIN 
-    `rare-guide-433209-e6.AdAccounts.Facebook Ads` AS fa ON TRUE
-  FULL OUTER JOIN 
-    `rare-guide-433209-e6.AdAccounts.Google Ads` AS ga ON TRUE
-  FULL OUTER JOIN 
-    `rare-guide-433209-e6.AdAccounts.Tiktok Ads` AS ta ON TRUE
-  FULL OUTER JOIN 
-    `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS ya ON TRUE
-),
-all_dates AS (
-  -- Generate the full date range
-  SELECT 
-    DATE_ADD(start_date, INTERVAL n DAY) AS Date
-  FROM 
-    date_scaffold, 
-    UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+WITH base_date_scaffold AS (
+  -- Combine date ranges from all source tables
+  SELECT DISTINCT Date
+  FROM (
+    SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
+    UNION ALL
+    SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Facebook Ads`
+    UNION ALL
+    SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Google Ads`
+    UNION ALL
+    SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Tiktok Ads`
+    UNION ALL
+    SELECT Date FROM `rare-guide-433209-e6.AdAccounts.YouTube Ads`
+  )
 ),
 base_data AS (
   SELECT
@@ -69,7 +56,7 @@ base_data AS (
     IFNULL(ta.Total_Cost, 0) AS TikTokAds_Cost,
     IFNULL(ya.Total_Cost, 0) AS YouTubeAds_Cost
   FROM
-    all_dates AS ad
+    base_date_scaffold AS ad
   LEFT JOIN
     `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
   ON
@@ -92,32 +79,37 @@ base_data AS (
     ad.Date = ya.Date
   GROUP BY
     ad.Date, fa.Total_Cost, ga.Total_Cost, ta.Total_Cost, ya.Total_Cost
-)
-
-SELECT
-  *,
-  -- Consolidated Metrics
-  SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
-    OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Ad_Spend,
-  SUM(Monthly_Leads) 
-    OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Leads,
-  SUM(Monthly_Qualified_Leads) 
-    OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Qualified_Leads,
-  SAFE_DIVIDE(
+),
+aggregated_metrics AS (
+  SELECT
+    *,
+    -- Consolidated Metrics
     SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date),
+      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) 
+      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Leads,
     SUM(Monthly_Qualified_Leads) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date)
-  ) AS Annual_CPQL,
-  SUM(Retained_that_Month) 
-    OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Retained,
-  SAFE_DIVIDE(
-    SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date),
-    SUM(In_Period_Retained) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date)
-  ) AS Annual_CPA
+      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date),
+      SUM(Monthly_Qualified_Leads) 
+        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date)
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) 
+      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date),
+      SUM(In_Period_Retained) 
+        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date)
+    ) AS Annual_CPA
+  FROM
+    base_data
+)
+SELECT
+  *
 FROM
-  base_data
+  aggregated_metrics
 ORDER BY
   Date
