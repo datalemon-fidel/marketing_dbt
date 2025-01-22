@@ -4,9 +4,30 @@
     materialized='table'  
 ) }}
 
-WITH base_data AS (
+WITH date_scaffold AS (
+  -- Calculate the minimum and maximum dates from both tables
+  SELECT 
+    LEAST(MIN(hl.Date), MIN(ya.Date)) AS start_date, 
+    GREATEST(MAX(hl.Date), MAX(ya.Date)) AS end_date
+  FROM 
+    `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+  FULL OUTER JOIN 
+    `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS ya
+  ON 
+    hl.Date = ya.Date
+),
+all_dates AS (
+  -- Generate a complete date range using the calculated start and end dates
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Date
+  FROM 
+    date_scaffold, 
+    UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+base_data AS (
   SELECT
-    hl.Date,
+    ad.Date,
     COUNT(CASE 
             WHEN (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') 
                  AND LOWER(hl.Source_Traffic) NOT LIKE '%organic%' 
@@ -38,19 +59,22 @@ WITH base_data AS (
           END) AS Retained_that_Month,
     IFNULL(ya.Total_Cost, 0) AS YouTubeAds_Cost
   FROM
+    all_dates AS ad
+  LEFT JOIN
     `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+  ON
+    ad.Date = hl.Date
   LEFT JOIN
     `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS ya
   ON
-    hl.Date = ya.Date
-  WHERE
-    hl.Source_Traffic = 'YouTube'
+    ad.Date = ya.Date
   GROUP BY
-    hl.Date, ya.Total_Cost
+    ad.Date, ya.Total_Cost
 )
 
 SELECT
   *,
+
   -- Annual Metrics
   SUM(YouTubeAds_Cost) 
     OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Ad_Spend,

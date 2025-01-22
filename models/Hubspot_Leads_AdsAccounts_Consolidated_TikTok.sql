@@ -4,9 +4,30 @@
     materialized='table'  
 ) }}
 
-WITH base_data AS (
+WITH date_scaffold AS (
+  -- Calculate the minimum and maximum dates from both tables
+  SELECT 
+    LEAST(MIN(hl.Date), MIN(ta.Date)) AS start_date, 
+    GREATEST(MAX(hl.Date), MAX(ta.Date)) AS end_date
+  FROM 
+    `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+  FULL OUTER JOIN 
+    `rare-guide-433209-e6.AdAccounts.Tiktok Ads` AS ta
+  ON 
+    hl.Date = ta.Date
+),
+all_dates AS (
+  -- Generate a complete date range using the calculated start and end dates
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Date
+  FROM 
+    date_scaffold, 
+    UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+base_data AS (
   SELECT
-    hl.Date,
+    ad.Date,
     COUNT(CASE 
             WHEN (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') 
                  AND LOWER(hl.Source_Traffic) NOT LIKE '%organic%' 
@@ -26,8 +47,8 @@ WITH base_data AS (
     COUNT(CASE 
             WHEN LOWER(hl.Source_Traffic) NOT LIKE '%organic%'
                  AND hl.Contact_lead_status = 'Retained' 
-                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) <= 60 
-                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) >= 0
+                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY, 'DAY') <= 60 
+                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY, 'DAY') >= 0
             THEN 1 
           END) AS Rolling_Window_Retained,
     COUNT(CASE
@@ -38,19 +59,22 @@ WITH base_data AS (
           END) AS Retained_that_Month,
     IFNULL(ta.Total_Cost, 0) AS TikTokAds_Cost
   FROM
+    all_dates AS ad
+  LEFT JOIN
     `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+  ON
+    ad.Date = hl.Date
   LEFT JOIN
     `rare-guide-433209-e6.AdAccounts.Tiktok Ads` AS ta
   ON
-    hl.Date = ta.Date
-  WHERE
-    hl.Source_Traffic = 'TikTok'
+    ad.Date = ta.Date
   GROUP BY
-    hl.Date, ta.Total_Cost
+    ad.Date, ta.Total_Cost
 )
 
 SELECT
   *,
+
   -- Annual Metrics
   SUM(TikTokAds_Cost) 
     OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Ad_Spend,
