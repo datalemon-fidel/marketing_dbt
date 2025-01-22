@@ -103,7 +103,51 @@ aggregated_metrics AS (
         OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date),
       SUM(In_Period_Retained) 
         OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date)
-    ) AS Annual_CPA
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics
+    SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
+      SUM(Monthly_Qualified_Leads) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
+    ) AS Rolling_60_CPQL,
+    SUM(Retained_that_Month) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Retained,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
+      SUM(In_Period_Retained) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics
+    SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
+      SUM(Monthly_Qualified_Leads) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
+    ) AS Rolling_365_CPQL,
+    SUM(Retained_that_Month) 
+      OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Retained,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost + GoogleAds_Cost + TikTokAds_Cost + YouTubeAds_Cost) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
+      SUM(In_Period_Retained) 
+        OVER (PARTITION BY NULL ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
+    ) AS Rolling_365_CPA
   FROM
     base_data
 )
