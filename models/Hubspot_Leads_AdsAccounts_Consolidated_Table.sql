@@ -4,11 +4,24 @@
     materialized='table'  
 ) }}
 
-WITH base_date_scaffold AS (
+WITH filtered_hubspot_leads AS (
+  -- Filter rows where Source_Traffic matches the required conditions
+  SELECT *
+  FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
+  WHERE (
+      LOWER(Source_Traffic) LIKE '%facebook%'
+      OR LOWER(Source_Traffic) LIKE '%google%'
+      OR LOWER(Source_Traffic) LIKE '%youtube%'
+      OR LOWER(Source_Traffic) LIKE '%tiktok%'
+  )
+  AND LOWER(Source_Traffic) NOT LIKE '%organic%'
+),
+
+base_date_scaffold AS (
   -- Combine date ranges from all source tables
   SELECT DISTINCT Date
   FROM (
-    SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
+    SELECT Date FROM filtered_hubspot_leads
     UNION ALL
     SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Facebook Ads`
     UNION ALL
@@ -23,33 +36,23 @@ base_data AS (
   SELECT
     ad.Date,
     COUNT(CASE 
-            WHEN (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') 
-                 AND LOWER(hl.Source_Traffic) NOT LIKE '%organic%' 
-            THEN 1 
+            WHEN (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') THEN 1 
           END) AS Monthly_Leads,
     COUNT(CASE 
-            WHEN LOWER(hl.Source_Traffic) NOT LIKE '%organic%' 
-                 AND hl._New__Marketing_Lead_Status = 'Qualified' 
-            THEN 1 
+            WHEN hl._New__Marketing_Lead_Status = 'Qualified' THEN 1 
           END) AS Monthly_Qualified_Leads,
     COUNT(CASE 
-            WHEN LOWER(hl.Source_Traffic) NOT LIKE '%organic%' 
-                 AND hl.Contact_lead_status = 'Retained'
-                 AND FORMAT_DATE('%Y-%m', hl.Retained_Date) = FORMAT_DATE('%Y-%m', hl.Date) 
-            THEN 1 
+            WHEN hl.Contact_lead_status = 'Retained'
+                 AND FORMAT_DATE('%Y-%m', hl.Retained_Date) = FORMAT_DATE('%Y-%m', hl.Date) THEN 1 
           END) AS In_Period_Retained,
     COUNT(CASE 
-            WHEN LOWER(hl.Source_Traffic) NOT LIKE '%organic%'
-                 AND hl.Contact_lead_status = 'Retained' 
+            WHEN hl.Contact_lead_status = 'Retained' 
                  AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) <= 60 
-                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) >= 0
-            THEN 1 
+                 AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) >= 0 THEN 1 
           END) AS Rolling_Window_Retained,
     COUNT(CASE
             WHEN hl.Date >= DATE('2024-01-01')
-                 AND LOWER(hl.Source_Traffic) NOT LIKE '%organic%'
-                 AND hl.Contact_lead_status = 'Retained'
-            THEN 1
+                 AND hl.Contact_lead_status = 'Retained' THEN 1
           END) AS Retained_that_Month,
     IFNULL(fa.Total_Cost, 0) AS FacebookAds_Cost,
     IFNULL(ga.Total_Cost, 0) AS GoogleAds_Cost,
@@ -58,7 +61,7 @@ base_data AS (
   FROM
     base_date_scaffold AS ad
   LEFT JOIN
-    `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+    filtered_hubspot_leads AS hl
   ON
     ad.Date = hl.Date
   LEFT JOIN

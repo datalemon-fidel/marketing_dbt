@@ -4,18 +4,27 @@
     materialized='table'  
 ) }}
 
-WITH date_scaffold AS (
+WITH filtered_hubspot_leads AS (
+  -- Filter for rows where Source_Traffic contains "Facebook"
+  SELECT *
+  FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
+  WHERE LOWER(Source_Traffic) LIKE '%facebook%'
+    AND LOWER(Source_Traffic) NOT LIKE '%organic%'
+),
+
+date_scaffold AS (
   -- Calculate the minimum and maximum dates from both tables
   SELECT 
     LEAST(MIN(hl.Date), MIN(fa.Date)) AS start_date, 
     GREATEST(MAX(hl.Date), MAX(fa.Date)) AS end_date
   FROM 
-    `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+    filtered_hubspot_leads AS hl
   FULL OUTER JOIN 
     `rare-guide-433209-e6.AdAccounts.Facebook Ads` AS fa
   ON 
     hl.Date = fa.Date
 ),
+
 all_dates AS (
   -- Generate a complete date range using the calculated start and end dates
   SELECT 
@@ -61,7 +70,7 @@ base_data AS (
   FROM
     all_dates AS ad
   LEFT JOIN
-    `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+    filtered_hubspot_leads AS hl
   ON
     ad.Date = hl.Date
   LEFT JOIN
@@ -74,7 +83,6 @@ base_data AS (
 
 SELECT
   *,
-
   -- Annual Metrics
   SUM(FacebookAds_Cost) 
     OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Ad_Spend,
