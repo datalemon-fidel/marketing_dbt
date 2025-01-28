@@ -151,6 +151,6 @@ SELECT
   *
 FROM
   aggregated_metrics
-ORDER BY
 WHERE Date IS NOT NULL
+ORDER BY
   Date
