@@ -6,17 +6,20 @@
 
 WITH filtered_hubspot_leads AS (
   -- Filter rows where Source_Traffic matches required conditions
-  SELECT *,
-    Date AS Created_Date,
-    Retained_Date
-  FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
-  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'facebook|google|youtube|tiktok')
-    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+  SELECT 
+    hl.* EXCEPT (Date, Retained_Date),  -- Exclude original Date & Retained_Date
+    hl.Date AS Created_Date,  -- Explicitly rename Date to Created_Date
+    hl.Retained_Date AS Retained_Date  -- Explicitly retain Retained_Date
+  FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
+  WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube|tiktok')
+    AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
 ),
 
 base_date_scaffold AS (
   -- Combine date ranges from all source tables
   SELECT Created_Date AS Aggregation_Date FROM filtered_hubspot_leads
+  UNION DISTINCT
+  SELECT Retained_Date AS Aggregation_Date FROM filtered_hubspot_leads
   UNION DISTINCT
   SELECT Date AS Aggregation_Date FROM `rare-guide-433209-e6.AdAccounts.Facebook Ads`
   UNION DISTINCT
@@ -25,8 +28,6 @@ base_date_scaffold AS (
   SELECT Date AS Aggregation_Date FROM `rare-guide-433209-e6.AdAccounts.Tiktok Ads`
   UNION DISTINCT
   SELECT Date AS Aggregation_Date FROM `rare-guide-433209-e6.AdAccounts.YouTube Ads`
-  UNION DISTINCT
-  SELECT Retained_Date AS Aggregation_Date FROM filtered_hubspot_leads
 ),
 
 ads_costs AS (
