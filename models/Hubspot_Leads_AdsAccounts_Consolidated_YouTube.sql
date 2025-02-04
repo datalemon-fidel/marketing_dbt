@@ -5,7 +5,7 @@
 ) }}
 
 WITH filtered_hubspot_leads AS (
-  -- Filter rows where Source_Traffic contains "YouTube" but excludes "Organic"
+  -- Filter for rows where Source_Traffic contains "YouTube" and excludes "Organic"
   SELECT *
   FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
   WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'youtube')
@@ -13,22 +13,22 @@ WITH filtered_hubspot_leads AS (
 ),
 
 date_scaffold AS (
-  -- Calculate the minimum and maximum dates from both tables
+  -- Get the minimum and maximum dates from Created Date, Retained Date, and Ad Date
   SELECT 
-    LEAST(MIN(hl.Date), MIN(ya.Date)) AS start_date, 
-    GREATEST(MAX(hl.Date), MAX(ya.Date)) AS end_date
+    LEAST(MIN(hl.Date), MIN(hl.Retained_Date), MIN(fa.Date)) AS start_date, 
+    GREATEST(MAX(hl.Date), MAX(hl.Retained_Date), MAX(fa.Date)) AS end_date
   FROM 
     filtered_hubspot_leads AS hl
   FULL OUTER JOIN 
-    `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS ya
+    `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS fa
   ON 
-    hl.Date = ya.Date
+    hl.Date = fa.Date
 ),
 
 all_dates AS (
-  -- Generate a complete date range using the calculated start and end dates
+  -- Generate a complete date range
   SELECT 
-    DATE_ADD(start_date, INTERVAL n DAY) AS Date
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
   FROM 
     date_scaffold, 
     UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
@@ -36,113 +36,136 @@ all_dates AS (
 
 base_data AS (
   SELECT
-    ad.Date,
+    ad.Aggregation_Date,
+
+    -- Monthly Leads based on Created Date
     COUNT(CASE 
-            WHEN (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') 
+            WHEN hl.Date = ad.Aggregation_Date 
+                 AND (hl.Jot_Form_Date IS NULL OR hl.Jot_Form_Date = '') 
             THEN 1 
           END) AS Monthly_Leads,
+    
+    -- Monthly Qualified Leads based on Created Date
     COUNT(CASE 
-            WHEN hl._New__Marketing_Lead_Status = 'Qualified' 
+            WHEN hl.Date = ad.Aggregation_Date 
+                 AND hl._New__Marketing_Lead_Status = 'Qualified' 
             THEN 1 
           END) AS Monthly_Qualified_Leads,
+
+    -- In Period Retained: Based on Created Date
     COUNT(CASE 
-            WHEN hl.Contact_lead_status = 'Retained'
+            WHEN hl.Date = ad.Aggregation_Date 
+                 AND hl.Contact_lead_status = 'Retained'
                  AND FORMAT_DATE('%Y-%m', hl.Retained_Date) = FORMAT_DATE('%Y-%m', hl.Date) 
             THEN 1 
           END) AS In_Period_Retained,
+
+    -- Rolling 60-Day Retained: Based on Created Date
     COUNT(CASE 
-            WHEN hl.Contact_lead_status = 'Retained' 
+            WHEN hl.Date = ad.Aggregation_Date 
+                 AND hl.Contact_lead_status = 'Retained' 
                  AND DATE_DIFF(hl.Retained_Date, hl.Date, DAY) BETWEEN 0 AND 60
             THEN 1 
           END) AS Rolling_Window_Retained,
+
+    -- Retained_that_Month: Now based on Retained_Date instead of Created Date
     COUNT(CASE
-            WHEN hl.Date >= '2024-01-01'
+            WHEN hl.Retained_Date = ad.Aggregation_Date 
                  AND hl.Contact_lead_status = 'Retained'
             THEN 1
           END) AS Retained_that_Month,
-    IFNULL(ya.Total_Cost, 0) AS YouTubeAds_Cost
+
+    -- Ad Spend based on Created Date
+    SUM(CASE 
+            WHEN fa.Date = ad.Aggregation_Date 
+            THEN IFNULL(fa.Total_Cost, 0) 
+          END) AS YouTubeAds_Cost
+
   FROM
     all_dates AS ad
   LEFT JOIN
     filtered_hubspot_leads AS hl
   ON
-    ad.Date = hl.Date
+    hl.Date = ad.Aggregation_Date OR hl.Retained_Date = ad.Aggregation_Date  -- Include both dates
   LEFT JOIN
-    `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS ya
+    `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS fa
   ON
-    ad.Date = ya.Date
+    fa.Date = ad.Aggregation_Date  -- YouTube Ads join
   GROUP BY
-    ad.Date, ya.Total_Cost
+    ad.Aggregation_Date
 ),
 
 aggregated_metrics AS (
   SELECT
     *,
+    
     -- Annual Metrics
     SUM(YouTubeAds_Cost) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Ad_Spend,
+      OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date) AS Annual_Ad_Spend,
     SUM(Monthly_Leads) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Leads,
+      OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date) AS Annual_Leads,
     SUM(Monthly_Qualified_Leads) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Qualified_Leads,
+      OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date) AS Annual_Qualified_Leads,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) 
-        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date),
+        OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date),
       SUM(Monthly_Qualified_Leads) 
-        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date)
+        OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date)
     ) AS Annual_CPQL,
+
     SUM(Retained_that_Month) 
-      OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date) AS Annual_Retained,
+      OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date) AS Annual_Retained,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) 
-        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date),
+        OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date),
       SUM(In_Period_Retained) 
-        OVER (PARTITION BY EXTRACT(YEAR FROM Date) ORDER BY Date)
+        OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date)
     ) AS Annual_CPA,
 
     -- Rolling 60-Day Metrics
     SUM(YouTubeAds_Cost) 
-      OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Ad_Spend,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Ad_Spend,
     SUM(Monthly_Leads) 
-      OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Leads,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Leads,
     SUM(Monthly_Qualified_Leads) 
-      OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Qualified_Leads,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Qualified_Leads,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) 
-        OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
       SUM(Monthly_Qualified_Leads) 
-        OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
     ) AS Rolling_60_CPQL,
     SUM(Retained_that_Month) 
-      OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Retained,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Retained,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) 
-        OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
       SUM(In_Period_Retained) 
-        OVER (ORDER BY Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
     ) AS Rolling_60_CPA,
 
     -- Rolling 365-Day Metrics
     SUM(YouTubeAds_Cost) 
-      OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Ad_Spend,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Ad_Spend,
     SUM(Monthly_Leads) 
-      OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Leads,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Leads,
     SUM(Monthly_Qualified_Leads) 
-      OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Qualified_Leads,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Qualified_Leads,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) 
-        OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
       SUM(Monthly_Qualified_Leads) 
-        OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
     ) AS Rolling_365_CPQL,
     SUM(Retained_that_Month) 
-      OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Retained,
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Retained,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) 
-        OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
       SUM(In_Period_Retained) 
-        OVER (ORDER BY Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
+        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
     ) AS Rolling_365_CPA
+
   FROM
     base_data
 )
@@ -151,6 +174,6 @@ SELECT
   *
 FROM
   aggregated_metrics
-WHERE Date IS NOT NULL
+WHERE Aggregation_Date IS NOT NULL
 ORDER BY
-  Date
+  Aggregation_Date
