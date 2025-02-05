@@ -105,7 +105,7 @@ base_data AS (
 aggregated_metrics AS (
   SELECT
     *,
-
+    
     -- Annual Metrics
     SUM(TikTokAds_Cost) 
       OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date) AS Annual_Ad_Spend,
@@ -127,32 +127,69 @@ aggregated_metrics AS (
         OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date),
       SUM(In_Period_Retained) 
         OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date)
-    ) AS Annual_CPA,
+    ) AS Annual_CPA
 
+  FROM base_data
+),
+
+rolling_calculations AS (
+  SELECT
+    *,
+    
     -- Rolling 60-Day Metrics
-    SUM(TikTokAds_Cost) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Ad_Spend,
-    SUM(Monthly_Leads) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Leads,
-    SUM(Monthly_Qualified_Leads) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Qualified_Leads,
+    (SELECT SUM(TikTokAds_Cost)
+     FROM aggregated_metrics AS sub
+     WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 59 DAY) 
+                                     AND aggregated_metrics.Aggregation_Date) AS Rolling_60_Ad_Spend,
+
+    (SELECT SUM(Monthly_Leads)
+     FROM aggregated_metrics AS sub
+     WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 59 DAY) 
+                                     AND aggregated_metrics.Aggregation_Date) AS Rolling_60_Leads,
+
+    (SELECT SUM(Retained_that_Month)
+     FROM aggregated_metrics AS sub
+     WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 59 DAY) 
+                                     AND aggregated_metrics.Aggregation_Date) AS Rolling_60_Retained,
+
+    SAFE_DIVIDE(
+      (SELECT SUM(TikTokAds_Cost)
+       FROM aggregated_metrics AS sub
+       WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 59 DAY) 
+                                       AND aggregated_metrics.Aggregation_Date),
+      (SELECT SUM(Monthly_Qualified_Leads)
+       FROM aggregated_metrics AS sub
+       WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 59 DAY) 
+                                       AND aggregated_metrics.Aggregation_Date)
+    ) AS Rolling_60_CPQL,
+
+    SAFE_DIVIDE(
+      (SELECT SUM(TikTokAds_Cost)
+       FROM aggregated_metrics AS sub
+       WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 59 DAY) 
+                                       AND aggregated_metrics.Aggregation_Date),
+      (SELECT SUM(In_Period_Retained)
+       FROM aggregated_metrics AS sub
+       WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 59 DAY) 
+                                       AND aggregated_metrics.Aggregation_Date)
+    ) AS Rolling_60_CPA,
 
     -- Rolling 365-Day Metrics
-    SUM(TikTokAds_Cost) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Ad_Spend,
-    SUM(Monthly_Leads) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Leads,
-    SUM(Monthly_Qualified_Leads) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Qualified_Leads
+    (SELECT SUM(TikTokAds_Cost)
+     FROM aggregated_metrics AS sub
+     WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 364 DAY) 
+                                     AND aggregated_metrics.Aggregation_Date) AS Rolling_365_Ad_Spend,
 
-  FROM
-    base_data
+    (SELECT SUM(Retained_that_Month)
+     FROM aggregated_metrics AS sub
+     WHERE sub.Aggregation_Date BETWEEN DATE_SUB(aggregated_metrics.Aggregation_Date, INTERVAL 364 DAY) 
+                                     AND aggregated_metrics.Aggregation_Date) AS Rolling_365_Retained
+
+  FROM aggregated_metrics
 )
 
 SELECT
   *
-FROM
-  aggregated_metrics
+FROM rolling_calculations
 WHERE Aggregation_Date IS NOT NULL
-ORDER BY
-  Aggregation_Date
+ORDER BY Aggregation_Date
