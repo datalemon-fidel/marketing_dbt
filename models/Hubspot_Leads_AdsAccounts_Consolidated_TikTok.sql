@@ -1,5 +1,6 @@
 --hubspot_leads_ads_accounts_consolidated_tiktok.sql
 
+
 {{ config(
     materialized='table'  
 ) }}
@@ -32,6 +33,15 @@ all_dates AS (
   FROM 
     date_scaffold, 
     UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+tiktok_ads_aggregated AS (
+  -- Aggregate Tiktok Ads Cost to avoid duplication
+  SELECT 
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS TikTokAds_Cost
+  FROM `rare-guide-433209-e6.AdAccounts.Tiktok Ads`
+  GROUP BY Date
 ),
 
 base_data AS (
@@ -75,11 +85,8 @@ base_data AS (
             THEN 1
           END) AS Retained_that_Month,
 
-    -- Ad Spend based on Created Date
-    SUM(CASE 
-            WHEN fa.Date = ad.Aggregation_Date 
-            THEN IFNULL(fa.Total_Cost, 0) 
-          END) AS TikTokAds_Cost
+    -- Ad Spend: Pulled from pre-aggregated table to prevent duplication
+    COALESCE(fa.TikTokAds_Cost, 0) AS TikTokAds_Cost
 
   FROM
     all_dates AS ad
@@ -88,17 +95,17 @@ base_data AS (
   ON
     hl.Date = ad.Aggregation_Date OR hl.Retained_Date = ad.Aggregation_Date  -- Include both dates
   LEFT JOIN
-    `rare-guide-433209-e6.AdAccounts.Tiktok Ads` AS fa
+    tiktok_ads_aggregated AS fa
   ON
-    fa.Date = ad.Aggregation_Date  -- Tiktok Ads join
+    fa.Aggregation_Date = ad.Aggregation_Date  -- Pre-aggregated Ads join
   GROUP BY
-    ad.Aggregation_Date
+    ad.Aggregation_Date, fa.TikTokAds_Cost
 ),
 
 aggregated_metrics AS (
   SELECT
     *,
-    
+
     -- Annual Metrics
     SUM(TikTokAds_Cost) 
       OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date) AS Annual_Ad_Spend,
@@ -129,20 +136,6 @@ aggregated_metrics AS (
       OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Leads,
     SUM(Monthly_Qualified_Leads) 
       OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Qualified_Leads,
-    SAFE_DIVIDE(
-      SUM(TikTokAds_Cost) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
-      SUM(Monthly_Qualified_Leads) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
-    ) AS Rolling_60_CPQL,
-    SUM(Retained_that_Month) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) AS Rolling_60_Retained,
-    SAFE_DIVIDE(
-      SUM(TikTokAds_Cost) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW),
-      SUM(In_Period_Retained) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW)
-    ) AS Rolling_60_CPA,
 
     -- Rolling 365-Day Metrics
     SUM(TikTokAds_Cost) 
@@ -150,21 +143,7 @@ aggregated_metrics AS (
     SUM(Monthly_Leads) 
       OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Leads,
     SUM(Monthly_Qualified_Leads) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Qualified_Leads,
-    SAFE_DIVIDE(
-      SUM(TikTokAds_Cost) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
-      SUM(Monthly_Qualified_Leads) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
-    ) AS Rolling_365_CPQL,
-    SUM(Retained_that_Month) 
-      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Retained,
-    SAFE_DIVIDE(
-      SUM(TikTokAds_Cost) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW),
-      SUM(In_Period_Retained) 
-        OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
-    ) AS Rolling_365_CPA
+      OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW) AS Rolling_365_Qualified_Leads
 
   FROM
     base_data

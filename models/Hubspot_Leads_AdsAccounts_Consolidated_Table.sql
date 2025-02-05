@@ -4,19 +4,20 @@
     materialized='table'  
 ) }}
 
+
 WITH filtered_hubspot_leads AS (
   -- Filter rows where Source_Traffic matches required conditions
   SELECT 
     hl.* EXCEPT (Date, Retained_Date),  -- Exclude original Date & Retained_Date
-    hl.Date AS Created_Date,  -- Explicitly rename Date to Created_Date
-    hl.Retained_Date AS Retained_Date  -- Explicitly retain Retained_Date
+    hl.Date AS Created_Date,  -- Rename Date to Created_Date
+    hl.Retained_Date AS Retained_Date  -- Keep Retained_Date explicitly
   FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
   WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube|tiktok')
     AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
 ),
 
 base_date_scaffold AS (
-  -- Combine date ranges from all source tables
+  -- Generate a complete date range using all relevant dates
   SELECT Created_Date AS Aggregation_Date FROM filtered_hubspot_leads
   UNION DISTINCT
   SELECT Retained_Date AS Aggregation_Date FROM filtered_hubspot_leads
@@ -98,7 +99,15 @@ aggregated_metrics AS (
         OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date),
       SUM(In_Period_Retained) 
         OVER (PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date)
-    ) AS Annual_CPA,
+    ) AS Annual_CPA
+
+  FROM base_data
+),
+
+rolling_metrics AS (
+  -- Apply rolling calculations at the end
+  SELECT
+    am.*,
 
     -- Rolling 60-Day Metrics
     SUM(Total_Ad_Cost) 
@@ -144,10 +153,10 @@ aggregated_metrics AS (
         OVER (ORDER BY Aggregation_Date ROWS BETWEEN 364 PRECEDING AND CURRENT ROW)
     ) AS Rolling_365_CPA
 
-  FROM base_data
+  FROM aggregated_metrics AS am
 )
 
 SELECT *
-FROM aggregated_metrics
+FROM rolling_metrics
 WHERE Aggregation_Date IS NOT NULL
 ORDER BY Aggregation_Date
