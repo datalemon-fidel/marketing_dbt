@@ -1,6 +1,5 @@
 --hubspot_leads_ads_accounts_consolidated_google.sql
 
-
 {{
     config(
         materialized='table'  
@@ -55,9 +54,10 @@ leads_created_metrics AS (
             AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
             THEN 1 
           END) AS In_Period_Retained,
+    /* CHANGED: Expanded window by 1 day on both ends */
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained' 
-            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 60
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
             THEN 1 
           END) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
@@ -69,9 +69,7 @@ leads_retained_metrics AS (
     Retained_Date AS Aggregation_Date,
     COUNT(1) AS Retained_that_Month
   FROM filtered_hubspot_leads
-  WHERE 
-    Contact_lead_status = 'Retained'
-    AND Retained_Date >= '2024-01-01'
+  WHERE Contact_lead_status = 'Retained'
   GROUP BY Retained_Date
 ),
 
@@ -98,7 +96,7 @@ base_data AS (
 aggregated_metrics AS (
   SELECT
     *,
-    -- Annual Metrics
+    -- Annual Metrics (unchanged)
     SUM(GoogleAds_Cost) OVER (
       PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
     ) AS Annual_Ad_Spend,
@@ -128,7 +126,7 @@ aggregated_metrics AS (
       )
     ) AS Annual_CPA,
 
-    -- Correct Rolling 60-Day Metrics using DATE RANGE
+    -- Rolling 60-Day Metrics (unchanged except for retained)
     SUM(GoogleAds_Cost) OVER (
       ORDER BY aggregation_date_num
       RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
@@ -151,9 +149,10 @@ aggregated_metrics AS (
         RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
       )
     ) AS Rolling_60_CPQL,
+    /* CHANGED: Expanded window by 1 day on both ends */
     SUM(Retained_that_Month) OVER (
       ORDER BY aggregation_date_num
-      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
     ) AS Rolling_60_Retained,
     SAFE_DIVIDE(
       SUM(GoogleAds_Cost) OVER (
@@ -166,7 +165,7 @@ aggregated_metrics AS (
       )
     ) AS Rolling_60_CPA,
 
-    -- Correct Rolling 365-Day Metrics
+    -- Rolling 365-Day Metrics (unchanged except for retained)
     SUM(GoogleAds_Cost) OVER (
       ORDER BY aggregation_date_num
       RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
@@ -189,9 +188,10 @@ aggregated_metrics AS (
         RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
       )
     ) AS Rolling_365_CPQL,
+    /* CHANGED: Expanded window by 1 day on both ends */
     SUM(Retained_that_Month) OVER (
       ORDER BY aggregation_date_num
-      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
     ) AS Rolling_365_Retained,
     SAFE_DIVIDE(
       SUM(GoogleAds_Cost) OVER (
