@@ -6,9 +6,10 @@
     )
 }}
 
+
 WITH filtered_hubspot_leads AS (
   SELECT 
-    hl.* EXCEPT (Date),  -- Exclude original Date column
+    hl.* EXCEPT (Date, Retained_Date),
     hl.Date AS Created_Date,
     hl.Retained_Date
   FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` AS hl
@@ -16,72 +17,62 @@ WITH filtered_hubspot_leads AS (
     AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
 ),
 
-date_scaffold AS (
+date_limits AS (
   SELECT 
-    LEAST(
-      MIN(hl.Created_Date), 
-      MIN(hl.Retained_Date), 
-      MIN(fa.Date),
-      MIN(ga.Date),
-      MIN(ta.Date),
-      MIN(yt.Date)
-    ) AS start_date,
-    GREATEST(
-      MAX(hl.Created_Date), 
-      MAX(hl.Retained_Date), 
-      MAX(fa.Date),
-      MAX(ga.Date),
-      MAX(ta.Date),
-      MAX(yt.Date)
-    ) AS end_date
-  FROM filtered_hubspot_leads AS hl
-  CROSS JOIN `rare-guide-433209-e6.AdAccounts.Facebook Ads` AS fa
-  CROSS JOIN `rare-guide-433209-e6.AdAccounts.Google Ads` AS ga
-  CROSS JOIN `rare-guide-433209-e6.AdAccounts.Tiktok Ads` AS ta
-  CROSS JOIN `rare-guide-433209-e6.AdAccounts.YouTube Ads` AS yt
+    MIN(dt) AS start_date,
+    MAX(dt) AS end_date
+  FROM (
+    SELECT Created_Date AS dt FROM filtered_hubspot_leads
+    UNION ALL SELECT Retained_Date FROM filtered_hubspot_leads
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Facebook Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Google Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Tiktok Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6.AdAccounts.YouTube Ads`
+  )
 ),
 
 all_dates AS (
   SELECT 
     DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
-  FROM date_scaffold, 
+  FROM date_limits, 
   UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
 ),
 
 ads_costs AS (
-  SELECT
+  SELECT 
     Date AS Aggregation_Date,
     SUM(Total_Cost) AS Total_Ad_Cost
   FROM (
-    SELECT Date, Total_Cost FROM `rare-guide-433209-e6.AdAccounts.Facebook Ads`
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6.AdAccounts.Facebook Ads`
     UNION ALL
-    SELECT Date, Total_Cost FROM `rare-guide-433209-e6.AdAccounts.Google Ads`
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6.AdAccounts.Google Ads`
     UNION ALL
-    SELECT Date, Total_Cost FROM `rare-guide-433209-e6.AdAccounts.Tiktok Ads`
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6.AdAccounts.Tiktok Ads`
     UNION ALL
-    SELECT Date, Total_Cost FROM `rare-guide-433209-e6.AdAccounts.YouTube Ads`
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6.AdAccounts.YouTube Ads`
   )
-  GROUP BY Date
+  GROUP BY 1
 ),
 
 leads_created_metrics AS (
   SELECT
     Created_Date AS Aggregation_Date,
-    COUNT(CASE WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') THEN 1 END) AS Monthly_Leads,
-    COUNT(CASE WHEN _New__Marketing_Lead_Status = 'Qualified' THEN 1 END) AS Monthly_Qualified_Leads,
-    COUNT(CASE 
-            WHEN Contact_lead_status = 'Retained'
-            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Created_Date) 
-            THEN 1 
-          END) AS In_Period_Retained,
-    /* Expanded window by 1 day on both ends */
-    COUNT(CASE 
-            WHEN Contact_lead_status = 'Retained' 
-            AND DATE_DIFF(Retained_Date, Created_Date, DAY) BETWEEN -1 AND 61
-            THEN 1 
-          END) AS Rolling_Window_Retained
+    COUNTIF(Jot_Form_Date IS NULL OR Jot_Form_Date = '') AS Monthly_Leads,
+    COUNTIF(_New__Marketing_Lead_Status = 'Qualified') AS Monthly_Qualified_Leads,
+    COUNTIF(
+      Contact_lead_status = 'Retained'
+      AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Created_Date)
+    ) AS In_Period_Retained,
+    COUNTIF(
+      Contact_lead_status = 'Retained' 
+      AND DATE_DIFF(Retained_Date, Created_Date, DAY) BETWEEN -1 AND 61
+    ) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
-  GROUP BY Created_Date
+  GROUP BY 1
 ),
 
 leads_retained_metrics AS (
@@ -90,7 +81,7 @@ leads_retained_metrics AS (
     COUNT(1) AS Retained_that_Month
   FROM filtered_hubspot_leads
   WHERE Contact_lead_status = 'Retained'
-  GROUP BY Retained_Date
+  GROUP BY 1
 ),
 
 base_data AS (
@@ -104,153 +95,80 @@ base_data AS (
     COALESCE(ac.Total_Ad_Cost, 0) AS Total_Ad_Cost,
     UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
   FROM all_dates AS ad
-  LEFT JOIN leads_created_metrics AS lc
-    ON ad.Aggregation_Date = lc.Aggregation_Date
-  LEFT JOIN leads_retained_metrics AS lr
-    ON ad.Aggregation_Date = lr.Aggregation_Date
-  LEFT JOIN ads_costs AS ac
-    ON ad.Aggregation_Date = ac.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc USING (Aggregation_Date)
+  LEFT JOIN leads_retained_metrics AS lr USING (Aggregation_Date)
+  LEFT JOIN ads_costs AS ac USING (Aggregation_Date)
 ),
 
-aggregated_metrics AS (
+window_calculations AS (
   SELECT
     *,
-    -- Annual Metrics
-    SUM(Total_Ad_Cost) OVER (
-      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-    ) AS Annual_Ad_Spend,
-    SUM(Monthly_Leads) OVER (
-      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-    ) AS Annual_Leads,
-    SUM(Monthly_Qualified_Leads) OVER (
-      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-    ) AS Annual_Qualified_Leads,
+    -- Annual calculations
+    SUM(Total_Ad_Cost) OVER annual AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER annual AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER annual AS Annual_Qualified_Leads,
     SAFE_DIVIDE(
-      SUM(Total_Ad_Cost) OVER (
-        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-      ),
-      SUM(Monthly_Qualified_Leads) OVER (
-        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-      )
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(Monthly_Qualified_Leads) OVER annual
     ) AS Annual_CPQL,
-    SUM(Retained_that_Month) OVER (
-      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-    ) AS Annual_Retained,
+    SUM(Retained_that_Month) OVER annual AS Annual_Retained,
     SAFE_DIVIDE(
-      SUM(Total_Ad_Cost) OVER (
-        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-      ),
-      SUM(In_Period_Retained) OVER (
-        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
-      )
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(In_Period_Retained) OVER annual
     ) AS Annual_CPA,
 
-    -- Rolling 60-Day Metrics
-    SUM(Total_Ad_Cost) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
-    ) AS Rolling_60_Ad_Spend,
-    SUM(Monthly_Leads) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
-    ) AS Rolling_60_Leads,
-    SUM(Monthly_Qualified_Leads) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
-    ) AS Rolling_60_Qualified_Leads,
+    -- 60-day rolling calculations
+    SUM(Total_Ad_Cost) OVER rolling_60d AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_60d AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_60d AS Rolling_60_Qualified_Leads,
     SAFE_DIVIDE(
-      SUM(Total_Ad_Cost) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
-      ),
-      SUM(Monthly_Qualified_Leads) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
-      )
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_60d
     ) AS Rolling_60_CPQL,
-    /* Expanded window by 1 day on both ends */
-    SUM(Retained_that_Month) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
-    ) AS Rolling_60_Retained,
+    SUM(Retained_that_Month) OVER rolling_60d_retained AS Rolling_60_Retained,
     SAFE_DIVIDE(
-      SUM(Total_Ad_Cost) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
-      ),
-      SUM(In_Period_Retained) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
-      )
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(In_Period_Retained) OVER rolling_60d
     ) AS Rolling_60_CPA,
 
-    -- Rolling 365-Day Metrics
-    SUM(Total_Ad_Cost) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
-    ) AS Rolling_365_Ad_Spend,
-    SUM(Monthly_Leads) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
-    ) AS Rolling_365_Leads,
-    SUM(Monthly_Qualified_Leads) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
-    ) AS Rolling_365_Qualified_Leads,
+    -- 365-day rolling calculations
+    SUM(Total_Ad_Cost) OVER rolling_365d AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_365d AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_365d AS Rolling_365_Qualified_Leads,
     SAFE_DIVIDE(
-      SUM(Total_Ad_Cost) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
-      ),
-      SUM(Monthly_Qualified_Leads) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
-      )
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_365d
     ) AS Rolling_365_CPQL,
-    /* Expanded window by 1 day on both ends */
-    SUM(Retained_that_Month) OVER (
-      ORDER BY aggregation_date_num
-      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
-    ) AS Rolling_365_Retained,
+    SUM(Retained_that_Month) OVER rolling_365d_retained AS Rolling_365_Retained,
     SAFE_DIVIDE(
-      SUM(Total_Ad_Cost) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
-      ),
-      SUM(In_Period_Retained) OVER (
-        ORDER BY aggregation_date_num
-        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
-      )
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(In_Period_Retained) OVER rolling_365d
     ) AS Rolling_365_CPA
   FROM base_data
+  WINDOW
+    annual AS (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) 
+      ORDER BY Aggregation_Date
+    ),
+    rolling_60d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ),
+    rolling_60d_retained AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
+    ),
+    rolling_365d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ),
+    rolling_365d_retained AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
+    )
 )
 
-SELECT 
-  Aggregation_Date,
-  Total_Ad_Cost,
-  Rolling_60_Ad_Spend,
-  Rolling_365_Ad_Spend,
-  Monthly_Leads,
-  Monthly_Qualified_Leads,
-  In_Period_Retained,
-  Rolling_Window_Retained,
-  Retained_that_Month,
-  Annual_Ad_Spend,
-  Annual_Leads,
-  Annual_Qualified_Leads,
-  Annual_CPQL,
-  Annual_Retained,
-  Annual_CPA,
-  Rolling_60_Leads,
-  Rolling_60_Qualified_Leads,
-  Rolling_60_CPQL,
-  Rolling_60_Retained,
-  Rolling_60_CPA,
-  Rolling_365_Leads,
-  Rolling_365_Qualified_Leads,
-  Rolling_365_CPQL,
-  Rolling_365_Retained,
-  Rolling_365_CPA
-FROM aggregated_metrics
+SELECT * EXCEPT (aggregation_date_num)
+FROM window_calculations
 WHERE Aggregation_Date IS NOT NULL
 ORDER BY Aggregation_Date
