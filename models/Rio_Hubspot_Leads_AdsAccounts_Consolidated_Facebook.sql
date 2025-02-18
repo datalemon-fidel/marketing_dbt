@@ -49,7 +49,7 @@ leads_created_metrics AS (
   SELECT
     Date AS Aggregation_Date,
     COUNT(1) AS Monthly_Leads,  
-    COUNT(CASE WHEN Marketing_Lead_Status = 'Qualified' THEN 1 END) AS Monthly_Qualified_Leads,  
+    COUNT(CASE WHEN Marketing_Lead_Status = 'qualified' THEN 1 END) AS Monthly_Qualified_Leads,  
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained'
             AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
