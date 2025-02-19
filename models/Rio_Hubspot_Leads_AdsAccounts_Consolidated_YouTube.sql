@@ -37,7 +37,7 @@ all_dates AS (
   UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
 ),
 
-youtube_ads_aggregated AS (
+google_ads_aggregated AS (
   SELECT
     Date AS Aggregation_Date,
     SUM(Total_Cost) AS YouTubeAds_Cost
@@ -57,7 +57,7 @@ leads_created_metrics AS (
           END) AS In_Period_Retained,
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained' 
-            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 59
             THEN 1 
           END) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
@@ -84,7 +84,7 @@ base_data AS (
     COALESCE(fa.YouTubeAds_Cost, 0) AS YouTubeAds_Cost,
     UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
   FROM all_dates AS ad
-  LEFT JOIN youtube_ads_aggregated AS fa
+  LEFT JOIN google_ads_aggregated AS fa
     ON ad.Aggregation_Date = fa.Aggregation_Date
   LEFT JOIN leads_created_metrics AS lc
     ON ad.Aggregation_Date = lc.Aggregation_Date
@@ -149,7 +149,7 @@ aggregated_metrics AS (
     ) AS Rolling_60_CPQL,
     SUM(Retained_that_Month) OVER (
       ORDER BY aggregation_date_num
-      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
     ) AS Rolling_60_Retained,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) OVER (
@@ -187,7 +187,7 @@ aggregated_metrics AS (
     ) AS Rolling_365_CPQL,
     SUM(Retained_that_Month) OVER (
       ORDER BY aggregation_date_num
-      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
     ) AS Rolling_365_Retained,
     SAFE_DIVIDE(
       SUM(YouTubeAds_Cost) OVER (

@@ -57,7 +57,7 @@ leads_created_metrics AS (
           END) AS In_Period_Retained,
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained' 
-            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 59
             THEN 1 
           END) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
@@ -95,8 +95,6 @@ base_data AS (
 aggregated_metrics AS (
   SELECT
     *,
-
-    -- Annual Metrics
     SUM(GoogleAds_Cost) OVER (
       PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
     ) AS Annual_Ad_Spend,
@@ -151,7 +149,7 @@ aggregated_metrics AS (
     ) AS Rolling_60_CPQL,
     SUM(Retained_that_Month) OVER (
       ORDER BY aggregation_date_num
-      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
     ) AS Rolling_60_Retained,
     SAFE_DIVIDE(
       SUM(GoogleAds_Cost) OVER (
@@ -189,7 +187,7 @@ aggregated_metrics AS (
     ) AS Rolling_365_CPQL,
     SUM(Retained_that_Month) OVER (
       ORDER BY aggregation_date_num
-      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
     ) AS Rolling_365_Retained,
     SAFE_DIVIDE(
       SUM(GoogleAds_Cost) OVER (
@@ -204,6 +202,32 @@ aggregated_metrics AS (
   FROM base_data
 )
 
-SELECT * FROM aggregated_metrics
+SELECT 
+  Aggregation_Date,
+  GoogleAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_Retained,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_Retained,
+  Rolling_365_CPA
+FROM aggregated_metrics
 WHERE Aggregation_Date IS NOT NULL
 ORDER BY Aggregation_Date
