@@ -49,7 +49,7 @@ WITH base_data AS (
             THEN 1 
           END) AS Rolling_365_Retained
   FROM
-    `rare-guide-433209-e6.AdAccounts.Hubspot_Leads` 
+    {{ source('stg', 'LLA_Hubspot_Leads') }} 
   GROUP BY 1,2,3,4,5,6
 )
 

@@ -1,0 +1,43 @@
+version: 2
+
+sources:
+  - name: stg
+    database: rare-guide-433209-e6   
+    schema: AdAccounts              
+    tables:
+      - name: LLA_Hubspot_Leads      
+        identifier: Hubspot_Leads     
+        description: "Staging table for Hubspot Leads data loaded from Google Sheets."
+
+      - name: LLA_FacebookAds
+        identifier: 'Facebook Ads'
+        description: "Staging table for Facebook Ads data loaded from Google Sheets."
+
+      - name: LLA_GoogleAds
+        identifier: 'Google Ads'
+        description: "Staging table for Google Ads data loaded from Google Sheets."
+
+      - name: LLA_TikTokAds
+        identifier: 'Tiktok Ads'
+        description: "Staging table for TikTok Ads data loaded from Google Sheets."
+
+      - name: LLA_YouTubeAds
+        identifier: 'YouTube Ads'
+        description: "Staging table for YouTube Ads data loaded from Google Sheets."
+
+
+      - name: Rio_Hubspot_Leads      
+        identifier: Rio_Hubspot_Leads  
+        description: "Staging table for Hubspot Leads data loaded from Google Sheets."
+
+      - name: Rio_FacebookAds
+        identifier: Rio_Facebook_Ads
+        description: "Staging table for Facebook Ads data loaded from Google Sheets."
+
+      - name: Rio_GoogleAds
+        identifier: Rio_Google_Ads
+        description: "Staging table for Google Ads data loaded from Google Sheets."
+
+      - name: Rio_YouTubeAds
+        identifier: Rio_YouTube_Ads
+        description: "Staging table for YouTube Ads data loaded from Google Sheets."

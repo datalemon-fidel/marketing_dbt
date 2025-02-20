@@ -1,4 +1,4 @@
--- Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+--Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
 
 {{
     config(
@@ -12,10 +12,9 @@ WITH filtered_hubspot_leads AS (
     hl.* EXCEPT (Date, Retained_Date),
     hl.Date AS Created_Date,
     hl.Retained_Date
-  FROM `rare-guide-433209-e6.AdAccounts.Rio_Hubspot_Leads` AS hl
-  WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube')
+  FROM {{ source('stg', 'LLA_Hubspot_Leads') }} AS hl
+  WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube|tiktok')
     AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
-    AND REGEXP_CONTAINS(LOWER(hl.Case_Profile), r'employment')
 ),
 
 date_limits AS (
@@ -25,9 +24,10 @@ date_limits AS (
   FROM (
     SELECT Created_Date AS dt FROM filtered_hubspot_leads
     UNION ALL SELECT Retained_Date FROM filtered_hubspot_leads
-    UNION ALL SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Rio_Facebook_Ads`
-    UNION ALL SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Rio_Google_Ads`
-    UNION ALL SELECT Date FROM `rare-guide-433209-e6.AdAccounts.Rio_YouTube_Ads`
+    UNION ALL SELECT Date FROM {{ source('stg', 'LLA_FacebookAds') }}
+    UNION ALL SELECT Date FROM {{ source('stg', 'LLA_GoogleAds') }}
+    UNION ALL SELECT Date FROM {{ source('stg', 'LLA_TikTokAds') }}
+    UNION ALL SELECT Date FROM {{ source('stg', 'LLA_YouTubeAds') }}
   )
 ),
 
@@ -44,13 +44,16 @@ ads_costs AS (
     SUM(Total_Cost) AS Total_Ad_Cost
   FROM (
     SELECT Date, Total_Cost 
-    FROM `rare-guide-433209-e6.AdAccounts.Rio_Facebook_Ads`
+    FROM {{ source('stg', 'LLA_FacebookAds') }}
     UNION ALL
     SELECT Date, Total_Cost 
-    FROM `rare-guide-433209-e6.AdAccounts.Rio_Google_Ads`
+    FROM {{ source('stg', 'LLA_GoogleAds') }}
     UNION ALL
     SELECT Date, Total_Cost 
-    FROM `rare-guide-433209-e6.AdAccounts.Rio_YouTube_Ads`
+    FROM {{ source('stg', 'LLA_TikTokAds') }}
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM {{ source('stg', 'LLA_YouTubeAds') }}
   )
   GROUP BY 1
 ),
@@ -58,8 +61,8 @@ ads_costs AS (
 leads_created_metrics AS (
   SELECT
     Created_Date AS Aggregation_Date,
-    COUNT(1) AS Monthly_Leads,
-    COUNTIF(Marketing_Lead_Status = 'qualified') AS Monthly_Qualified_Leads,
+    COUNTIF(Jot_Form_Date IS NULL OR Jot_Form_Date = '') AS Monthly_Leads,
+    COUNTIF(_New__Marketing_Lead_Status = 'Qualified') AS Monthly_Qualified_Leads,
     COUNTIF(
       Contact_lead_status = 'Retained'
       AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Created_Date)
@@ -80,9 +83,6 @@ leads_retained_metrics AS (
   WHERE Contact_lead_status = 'Retained'
   GROUP BY 1
 ),
-
--- Rest of the model remains identical from base_data onward...
--- [The rest of the original code remains unchanged]
 
 base_data AS (
   SELECT
