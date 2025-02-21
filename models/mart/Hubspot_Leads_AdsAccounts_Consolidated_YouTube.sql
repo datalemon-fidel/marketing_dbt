@@ -1,5 +1,10 @@
 --hubspot_leads_ads_accounts_consolidated_youtube.sql
 
+{{
+    config(
+        materialized='table'  
+    )
+}}
 
 WITH filtered_hubspot_leads AS (
   SELECT *
