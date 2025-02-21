@@ -1,14 +1,9 @@
 --hubspot_leads_ads_accounts_consolidated_youtube.sql
 
 
-{{
-    config(
-        materialized='table'  
-    )
-}}
-
 WITH filtered_hubspot_leads AS (
   SELECT *
+  --FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
   FROM {{ source('stg', 'LLA_Hubspot_Leads') }}
   WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'youtube')
     AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
