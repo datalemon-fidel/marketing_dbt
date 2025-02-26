@@ -71,6 +71,15 @@ leads_created_metrics AS (
   GROUP BY Date
 ),
 
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
 rolling_retained AS (
   SELECT
     ad.Aggregation_Date,
@@ -95,6 +104,7 @@ base_data AS (
     COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
     COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
     COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
     COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
     COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
     COALESCE(fa.GoogleAds_Cost, 0) AS GoogleAds_Cost,
@@ -104,6 +114,8 @@ base_data AS (
     ON ad.Aggregation_Date = fa.Aggregation_Date
   LEFT JOIN leads_created_metrics AS lc
     ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
   LEFT JOIN rolling_retained rr
     ON ad.Aggregation_Date = rr.Aggregation_Date
 ),
@@ -128,7 +140,7 @@ aggregated_metrics AS (
         PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
       )
     ) AS Annual_CPQL,
-    SUM(Rolling_60_Retained) OVER (
+    SUM(Retained_that_Month) OVER (
       PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
     ) AS Annual_Retained,
     SAFE_DIVIDE(
@@ -219,6 +231,7 @@ SELECT
   Monthly_Qualified_Leads,
   In_Period_Retained,
   Rolling_Window_Retained,
+  Retained_that_Month,
   Rolling_60_Retained,
   Rolling_365_Retained,
   Annual_Ad_Spend,
