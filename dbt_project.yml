@@ -29,5 +29,11 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   marketing_dbt:
-    example:
-      +materialized: view
+    stg:
+      +materialized: table
+      +schema: stg
+      +tags: ['staging']
+    mart:
+      +materialized: table
+      +schema: mart
+      +tags: ['mart']
