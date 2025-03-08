@@ -1,0 +1,3310 @@
+2025-03-08 02:55:03.657009 (MainThread): 02:55:03  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee069d1f110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee069d1edd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee069d1f790>]}
+2025-03-08 02:55:03.662338 (MainThread): 02:55:03  Running dbt...
+2025-03-08 02:55:03.662933 (MainThread): 02:55:03  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/tmp/jobs/70471830377930/.dbt', 'debug': 'True', 'version_check': 'True', 'log_path': '/tmp/jobs/70471830377930/target/logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'False', 'quiet': 'False', 'no_print': 'None', 'log_format': 'json', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt --log-format json --debug run --target default --profile user --profiles-dir /tmp/jobs/70471830377930/.dbt --project-dir /tmp/jobs/70471830377930/target', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+2025-03-08 02:55:04.443654 (MainThread): 02:55:04  Discovered Exposures:
+[]
+2025-03-08 02:55:04.444645 (MainThread): 02:55:04  Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee056721e10>]}
+2025-03-08 02:55:04.489666 (MainThread): 02:55:04  Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06afa5650>]}
+2025-03-08 02:55:04.490485 (MainThread): 02:55:04  Registered adapter: bigquery=1.10.0-post5+3f120b4cb243f4f3950a73b3d6cd038f92612ce0
+2025-03-08 02:55:04.713782 (MainThread): 02:55:04  checksum: aa1d893bed2f2746d84eb99a614b5bb3471098df6f66a7800e58d304e792a308, vars: {}, profile: user, target: default, version: 2025.3.4+d907f5f
+2025-03-08 02:55:04.714935 (MainThread): 02:55:04  Observability Metric: msgpack_manifest_bytes=622136.0
+2025-03-08 02:55:04.778688 (MainThread): 02:55:04  Unable to do partial parsing because a project config has changed
+2025-03-08 02:55:04.779306 (MainThread): 02:55:04  Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06afa6910>]}
+2025-03-08 02:55:05.579307 (MainThread): 02:55:05  Sending event: {'category': 'dbt', 'action': 'plugin_get_nodes', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee056408690>]}
+2025-03-08 02:55:05.580018 (MainThread): 02:55:05  Sending event: {'category': 'dbt', 'action': 'plugin_get_nodes', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee056458210>]}
+2025-03-08 02:55:05.644661 (MainThread): 02:55:05  Observability Metric: msgpack_manifest_bytes=623476.0
+2025-03-08 02:55:05.649783 (MainThread): 02:55:05  Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06bde2610>]}
+2025-03-08 02:55:05.650388 (MainThread): 02:55:05  Observability Metric: path_count=179.0
+2025-03-08 02:55:05.650898 (MainThread): 02:55:05  Observability Metric: parsed_path_count=179.0
+2025-03-08 02:55:05.651360 (MainThread): 02:55:05  Observability Metric: read_files_elapsed=0.019470345228910446
+2025-03-08 02:55:05.651803 (MainThread): 02:55:05  Observability Metric: load_macros_elapsed=0.5151453614234924
+2025-03-08 02:55:05.652239 (MainThread): 02:55:05  Observability Metric: parse_project_elapsed=0.2584356367588043
+2025-03-08 02:55:05.652656 (MainThread): 02:55:05  Observability Metric: patch_sources_elapsed=0.005662570707499981
+2025-03-08 02:55:05.653097 (MainThread): 02:55:05  Observability Metric: process_manifest_elapsed=0.024187088012695312
+2025-03-08 02:55:05.653517 (MainThread): 02:55:05  Observability Metric: load_all_elapsed=0.942116379737854
+2025-03-08 02:55:05.653946 (MainThread): 02:55:05  Observability Metric: is_partial_parse_enabled=1.0
+2025-03-08 02:55:05.711995 (MainThread): 02:55:05  Wrote artifact WritableManifest to /tmp/jobs/70471830377930/target/target/manifest.json
+2025-03-08 02:55:05.713391 (MainThread): 02:55:05  Wrote artifact SemanticManifest to /tmp/jobs/70471830377930/target/target/semantic_manifest.json
+2025-03-08 02:55:05.716615 (MainThread): 02:55:05  Wrote artifact PublicationArtifact to /tmp/jobs/70471830377930/target/target/.publication.json
+2025-03-08 02:55:05.718717 (MainThread): 02:55:05  Wrote artifact ResolvedProjectsArtifact to /tmp/jobs/70471830377930/target/target/.resolved_project.json
+2025-03-08 02:55:05.983960 (MainThread): 02:55:05  Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee01ea53fd0>]}
+2025-03-08 02:55:05.984678 (MainThread): 02:55:05  Found 20 models, 9 sources, 491 macros
+2025-03-08 02:55:05.985126 (MainThread): 02:55:05  Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee01ee7db50>]}
+2025-03-08 02:55:05.987475 (MainThread): 02:55:05  
+2025-03-08 02:55:05.987926 (MainThread): 02:55:05
+2025-03-08 02:55:05.987926 (MainThread): 02:55:05  Concurrency: 4 threads (target='default')
+2025-03-08 02:55:05.988340 (MainThread): 02:55:05  
+2025-03-08 02:55:05.988938 (MainThread): 02:55:05  Acquiring new bigquery connection 'master'
+2025-03-08 02:55:05.993216 (ThreadPoolExecutor-0_0): 02:55:05  Acquiring new bigquery connection 'list_rare-guide-433209-e6'
+2025-03-08 02:55:06.088198 (ThreadPoolExecutor-0_1): 02:55:06  Acquiring new bigquery connection 'list_rare-guide-433209-e6'
+2025-03-08 02:55:06.088895 (ThreadPoolExecutor-0_0): 02:55:06  Opening a new connection, currently in state init
+2025-03-08 02:55:06.089459 (ThreadPoolExecutor-0_1): 02:55:06  Opening a new connection, currently in state init
+2025-03-08 02:55:06.642203 (ThreadPoolExecutor-1_0): 02:55:06  Re-using an available connection from the pool (formerly list_rare-guide-433209-e6, now list_rare-guide-433209-e6_AdAccounts_stg)
+2025-03-08 02:55:06.642873 (ThreadPoolExecutor-1_1): 02:55:06  Re-using an available connection from the pool (formerly list_rare-guide-433209-e6, now list_rare-guide-433209-e6_AdAccounts_mart)
+2025-03-08 02:55:06.643776 (ThreadPoolExecutor-1_0): 02:55:06  Opening a new connection, currently in state closed
+2025-03-08 02:55:06.644434 (ThreadPoolExecutor-1_1): 02:55:06  Opening a new connection, currently in state closed
+2025-03-08 02:55:06.927016 (MainThread): 02:55:06  Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee01eb14250>]}
+2025-03-08 02:55:06.927647 (MainThread): 02:55:06  Opening a new connection, currently in state init
+2025-03-08 02:55:06.969899 (Thread-1 (worker)): 02:55:06  Began running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 02:55:06.970424 (Thread-2 (worker)): 02:55:06  Began running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 02:55:06.971065 (Thread-3 (worker)): 02:55:06  Began running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 02:55:06.971775 (Thread-4 (worker)): 02:55:06  Began running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok
+2025-03-08 02:55:06.972595 (Thread-1 (worker)): 02:55:06  1 of 20 START sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_Facebook  [RUN]
+2025-03-08 02:55:06.973626 (Thread-2 (worker)): 02:55:06  2 of 20 START sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_Google  [RUN]
+2025-03-08 02:55:06.974310 (Thread-3 (worker)): 02:55:06  3 of 20 START sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_Table  [RUN]
+2025-03-08 02:55:06.975017 (Thread-4 (worker)): 02:55:06  4 of 20 START sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_TikTok  [RUN]
+2025-03-08 02:55:06.976022 (Thread-1 (worker)): 02:55:06  Re-using an available connection from the pool (formerly list_rare-guide-433209-e6_AdAccounts_stg, now model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook)
+2025-03-08 02:55:06.976724 (Thread-2 (worker)): 02:55:06  Re-using an available connection from the pool (formerly list_rare-guide-433209-e6_AdAccounts_mart, now model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google)
+2025-03-08 02:55:06.977376 (Thread-3 (worker)): 02:55:06  Acquiring new bigquery connection 'model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table'
+2025-03-08 02:55:06.978086 (Thread-4 (worker)): 02:55:06  Acquiring new bigquery connection 'model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok'
+2025-03-08 02:55:06.978773 (Thread-1 (worker)): 02:55:06  Began compiling node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 02:55:06.979449 (Thread-2 (worker)): 02:55:06  Began compiling node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 02:55:06.979986 (Thread-3 (worker)): 02:55:06  Began compiling node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 02:55:06.980544 (Thread-4 (worker)): 02:55:06  Began compiling node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok
+2025-03-08 02:55:06.987381 (Thread-1 (worker)): 02:55:06  Writing injected SQL for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook"
+2025-03-08 02:55:06.990644 (Thread-2 (worker)): 02:55:06  Writing injected SQL for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google"
+2025-03-08 02:55:06.994533 (Thread-3 (worker)): 02:55:06  Writing injected SQL for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table"
+2025-03-08 02:55:06.997400 (Thread-4 (worker)): 02:55:06  Writing injected SQL for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok"
+2025-03-08 02:55:06.998799 (Thread-2 (worker)): 02:55:06  Began executing node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 02:55:06.999248 (Thread-1 (worker)): 02:55:06  Began executing node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 02:55:06.999789 (Thread-3 (worker)): 02:55:06  Began executing node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 02:55:07.011099 (Thread-4 (worker)): 02:55:07  Began executing node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok
+2025-03-08 02:55:07.011727 (Thread-2 (worker)): 02:55:07  Opening a new connection, currently in state closed
+2025-03-08 02:55:07.013165 (Thread-1 (worker)): 02:55:07  Opening a new connection, currently in state closed
+2025-03-08 02:55:07.014630 (Thread-3 (worker)): 02:55:07  Opening a new connection, currently in state init
+2025-03-08 02:55:07.016047 (Thread-4 (worker)): 02:55:07  Opening a new connection, currently in state init
+2025-03-08 02:55:07.384861 (Thread-2 (worker)): 02:55:07  Writing runtime sql for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google"
+2025-03-08 02:55:07.386863 (Thread-4 (worker)): 02:55:07  Writing runtime sql for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok"
+2025-03-08 02:55:07.388469 (Thread-1 (worker)): 02:55:07  Writing runtime sql for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook"
+2025-03-08 02:55:07.389761 (Thread-3 (worker)): 02:55:07  Writing runtime sql for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table"
+2025-03-08 02:55:07.391583 (Thread-4 (worker)): 02:55:07  On model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Hubspot_Leads_AdsAccounts_Consolidated_TikTok`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      --hubspot_leads_ads_accounts_consolidated_tiktok.sql
+
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT *
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Hubspot_Leads`
+  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'tiktok')
+    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+),
+
+retained_leads AS (
+  SELECT
+    Date AS Created_Date,
+    Retained_Date
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+),
+
+date_scaffold AS (
+  SELECT 
+    LEAST(
+      MIN(hl.Date), 
+      MIN(hl.Retained_Date), 
+      MIN(fa.Date)
+    ) AS start_date,
+    GREATEST(
+      MAX(hl.Date), 
+      MAX(hl.Retained_Date), 
+      MAX(fa.Date)
+    ) AS end_date
+  FROM filtered_hubspot_leads AS hl
+  CROSS JOIN `rare-guide-433209-e6`.`AdAccounts`.`Tiktok Ads` AS fa
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_scaffold, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+tiktok_ads_aggregated AS (
+  SELECT
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS TikTokAds_Cost
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Tiktok Ads`
+  GROUP BY Date
+),
+
+leads_created_metrics AS (
+  SELECT
+    Date AS Aggregation_Date,
+    COUNT(CASE WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') THEN 1 END) AS Monthly_Leads,
+    COUNT(CASE WHEN _New__Marketing_Lead_Status = 'Qualified' THEN 1 END) AS Monthly_Qualified_Leads,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained'
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS In_Period_Retained,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained' 
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+            THEN 1 
+          END) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY Date
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
+rolling_retained AS (
+  SELECT
+    ad.Aggregation_Date,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_60_Retained,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_365_Retained
+  FROM all_dates ad
+  LEFT JOIN retained_leads rl
+    ON rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+  GROUP BY 1
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
+    COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
+    COALESCE(fa.TikTokAds_Cost, 0) AS TikTokAds_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN tiktok_ads_aggregated AS fa
+    ON ad.Aggregation_Date = fa.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+  LEFT JOIN rolling_retained rr
+    ON ad.Aggregation_Date = rr.Aggregation_Date
+),
+
+aggregated_metrics AS (
+  SELECT
+    *,
+    SUM(TikTokAds_Cost) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(TikTokAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(TikTokAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(In_Period_Retained) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics
+    SUM(TikTokAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(TikTokAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPQL,
+    SAFE_DIVIDE(
+      SUM(TikTokAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics
+    SUM(TikTokAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(TikTokAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPQL,
+    SAFE_DIVIDE(
+      SUM(TikTokAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPA
+  FROM base_data
+)
+
+SELECT 
+  Aggregation_Date,
+  TikTokAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Rolling_60_Retained,
+  Rolling_365_Retained,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_CPA
+FROM aggregated_metrics
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 02:55:07.392853 (Thread-2 (worker)): 02:55:07  On model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Hubspot_Leads_AdsAccounts_Consolidated_Google`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      --hubspot_leads_ads_accounts_consolidated_google.sql
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT *
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Hubspot_Leads`
+  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'google')
+    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+),
+
+retained_leads AS (
+  SELECT
+    Date AS Created_Date,
+    Retained_Date
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+),
+
+date_scaffold AS (
+  SELECT 
+    LEAST(
+      MIN(hl.Date), 
+      MIN(hl.Retained_Date), 
+      MIN(fa.Date)
+    ) AS start_date,
+    GREATEST(
+      MAX(hl.Date), 
+      MAX(hl.Retained_Date), 
+      MAX(fa.Date)
+    ) AS end_date
+  FROM filtered_hubspot_leads AS hl
+  CROSS JOIN `rare-guide-433209-e6`.`AdAccounts`.`Google Ads` AS fa
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_scaffold, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+google_ads_aggregated AS (
+  SELECT
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS GoogleAds_Cost
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Google Ads`
+  GROUP BY Date
+),
+
+leads_created_metrics AS (
+  SELECT
+    Date AS Aggregation_Date,
+    COUNT(CASE WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') THEN 1 END) AS Monthly_Leads,
+    COUNT(CASE WHEN _New__Marketing_Lead_Status = 'Qualified' THEN 1 END) AS Monthly_Qualified_Leads,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained'
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS In_Period_Retained,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained' 
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+            THEN 1 
+          END) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY Date
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
+rolling_retained AS (
+  SELECT
+    ad.Aggregation_Date,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_60_Retained,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_365_Retained
+  FROM all_dates ad
+  LEFT JOIN retained_leads rl
+    ON rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+  GROUP BY 1
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
+    COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
+    COALESCE(fa.GoogleAds_Cost, 0) AS GoogleAds_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN google_ads_aggregated AS fa
+    ON ad.Aggregation_Date = fa.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+  LEFT JOIN rolling_retained rr
+    ON ad.Aggregation_Date = rr.Aggregation_Date
+),
+
+aggregated_metrics AS (
+  SELECT
+    *,
+    SUM(GoogleAds_Cost) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(In_Period_Retained) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics
+    SUM(GoogleAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPQL,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics
+    SUM(GoogleAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPQL,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPA
+  FROM base_data
+)
+
+SELECT 
+  Aggregation_Date,
+  GoogleAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Rolling_60_Retained,
+  Rolling_365_Retained,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_CPA
+FROM aggregated_metrics
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 02:55:07.393869 (Thread-1 (worker)): 02:55:07  On model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Hubspot_Leads_AdsAccounts_Consolidated_Facebook`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      -- hubspot_leads_ads_accounts_consolidated_facebook.sql
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT *
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Hubspot_Leads`
+  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'facebook')
+    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+),
+
+retained_leads AS (
+  SELECT
+    Date AS Created_Date,
+    Retained_Date
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+),
+
+date_scaffold AS (
+  SELECT 
+    LEAST(
+      MIN(hl.Date), 
+      MIN(hl.Retained_Date), 
+      MIN(fa.Date)
+    ) AS start_date,
+    GREATEST(
+      MAX(hl.Date), 
+      MAX(hl.Retained_Date), 
+      MAX(fa.Date)
+    ) AS end_date
+  FROM filtered_hubspot_leads AS hl
+  CROSS JOIN `rare-guide-433209-e6`.`AdAccounts`.`Facebook Ads` AS fa
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_scaffold, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+facebook_ads_aggregated AS (
+  SELECT
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS FacebookAds_Cost
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Facebook Ads`
+  GROUP BY Date
+),
+
+leads_created_metrics AS (
+  SELECT
+    Date AS Aggregation_Date,
+    COUNT(CASE WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') THEN 1 END) AS Monthly_Leads,
+    COUNT(CASE WHEN _New__Marketing_Lead_Status = 'Qualified' THEN 1 END) AS Monthly_Qualified_Leads,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained'
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS In_Period_Retained,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained' 
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+            THEN 1 
+          END) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY Date
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
+rolling_retained AS (
+  SELECT
+    ad.Aggregation_Date,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_60_Retained,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_365_Retained
+  FROM all_dates ad
+  LEFT JOIN retained_leads rl
+    ON rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+  GROUP BY 1
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
+    COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
+    COALESCE(fa.FacebookAds_Cost, 0) AS FacebookAds_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN facebook_ads_aggregated AS fa
+    ON ad.Aggregation_Date = fa.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+  LEFT JOIN rolling_retained rr
+    ON ad.Aggregation_Date = rr.Aggregation_Date
+),
+
+aggregated_metrics AS (
+  SELECT
+    *,
+    SUM(FacebookAds_Cost) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(In_Period_Retained) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics
+    SUM(FacebookAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPQL,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics
+    SUM(FacebookAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPQL,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPA
+  FROM base_data
+)
+
+SELECT 
+  Aggregation_Date,
+  FacebookAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Rolling_60_Retained,
+  Rolling_365_Retained,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_CPA
+FROM aggregated_metrics
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 02:55:07.395058 (Thread-3 (worker)): 02:55:07  On model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Hubspot_Leads_AdsAccounts_Consolidated_Table`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      --Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT 
+    hl.* EXCEPT (Date, Retained_Date),
+    hl.Date AS Created_Date,
+    hl.Retained_Date
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Hubspot_Leads` AS hl
+  WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube|tiktok')
+    AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
+),
+
+retained_leads AS (
+  SELECT
+    Created_Date,
+    Retained_Date
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+),
+
+date_limits AS (
+  SELECT 
+    MIN(dt) AS start_date,
+    MAX(dt) AS end_date
+  FROM (
+    SELECT Created_Date AS dt FROM filtered_hubspot_leads
+    UNION ALL SELECT Retained_Date FROM filtered_hubspot_leads
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Facebook Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Google Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Tiktok Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`YouTube Ads`
+  )
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_limits, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+ads_costs AS (
+  SELECT 
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS Total_Ad_Cost
+  FROM (
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Facebook Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Google Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Tiktok Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`YouTube Ads`
+  )
+  GROUP BY 1
+),
+
+leads_created_metrics AS (
+  SELECT
+    Created_Date AS Aggregation_Date,
+    COUNTIF(Jot_Form_Date IS NULL OR Jot_Form_Date = '') AS Monthly_Leads,
+    COUNTIF(_New__Marketing_Lead_Status = 'Qualified') AS Monthly_Qualified_Leads,
+    COUNTIF(
+      Contact_lead_status = 'Retained'
+      AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Created_Date)
+    ) AS In_Period_Retained,
+    COUNTIF(
+      Contact_lead_status = 'Retained' 
+      AND DATE_DIFF(Retained_Date, Created_Date, DAY) BETWEEN -1 AND 61
+    ) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY 1
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY 1
+),
+
+rolling_retained AS (
+  SELECT
+    ad.Aggregation_Date,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_60_Retained,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_365_Retained
+  FROM all_dates ad
+  LEFT JOIN retained_leads rl
+    ON rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+  GROUP BY 1
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
+    COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
+    COALESCE(ac.Total_Ad_Cost, 0) AS Total_Ad_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+  LEFT JOIN rolling_retained rr
+    ON ad.Aggregation_Date = rr.Aggregation_Date
+  LEFT JOIN ads_costs AS ac
+    ON ad.Aggregation_Date = ac.Aggregation_Date
+),
+
+window_calculations AS (
+  SELECT
+    *,
+    SUM(Total_Ad_Cost) OVER annual AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER annual AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER annual AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(Monthly_Qualified_Leads) OVER annual
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER annual AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(In_Period_Retained) OVER annual
+    ) AS Annual_CPA,
+
+    SUM(Total_Ad_Cost) OVER rolling_60d AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_60d AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_60d AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_60d
+    ) AS Rolling_60_CPQL,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(In_Period_Retained) OVER rolling_60d
+    ) AS Rolling_60_CPA,
+
+    SUM(Total_Ad_Cost) OVER rolling_365d AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_365d AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_365d AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_365d
+    ) AS Rolling_365_CPQL,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(In_Period_Retained) OVER rolling_365d
+    ) AS Rolling_365_CPA
+  FROM base_data
+  WINDOW
+    annual AS (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) 
+      ORDER BY Aggregation_Date
+    ),
+    rolling_60d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ),
+    rolling_365d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    )
+)
+
+SELECT * EXCEPT (aggregation_date_num)
+FROM window_calculations
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 02:55:07.814935 (Thread-3 (worker)): 02:55:07  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:b4dec921-b196-4246-897a-e72448b6ce07&page=queryresults
+2025-03-08 02:55:07.830838 (Thread-1 (worker)): 02:55:07  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:9c72ba47-d493-47ef-8ffe-db0a0e87ccf1&page=queryresults
+2025-03-08 02:55:07.836156 (Thread-2 (worker)): 02:55:07  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:c73b13c9-a5c3-45d1-9212-55abebc2248e&page=queryresults
+2025-03-08 02:55:07.899776 (Thread-4 (worker)): 02:55:07  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:9bb1102b-1dce-45a2-8223-5040c98c5473&page=queryresults
+2025-03-08 02:59:13.227924 (Thread-4 (worker)): 02:59:13  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:9bb1102b-1dce-45a2-8223-5040c98c5473&page=queryresults
+2025-03-08 02:59:13.233053 (Thread-4 (worker)): 02:59:13  Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_TikTok (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql
+2025-03-08 02:59:13.235207 (Thread-4 (worker)): 02:59:13  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee0562d6850>]}
+2025-03-08 02:59:13.236163 (Thread-4 (worker)): 02:59:13  4 of 20 ERROR creating sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_TikTok  [[31mERROR[0m in 246.26s]
+2025-03-08 02:59:13.237173 (Thread-4 (worker)): 02:59:13  Finished running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok
+2025-03-08 02:59:13.238187 (Thread-4 (worker)): 02:59:13  Began running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+2025-03-08 02:59:13.238761 (Thread-7 (_handle_results)): 02:59:13  Marking all children of 'model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok' to be skipped because of status 'error'.  Reason: Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_TikTok (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql.
+2025-03-08 02:59:13.239822 (Thread-4 (worker)): 02:59:13  5 of 20 START sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_YouTube  [RUN]
+2025-03-08 02:59:13.241305 (Thread-4 (worker)): 02:59:13  Re-using an available connection from the pool (formerly model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_TikTok, now model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube)
+2025-03-08 02:59:13.242501 (Thread-4 (worker)): 02:59:13  Began compiling node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+2025-03-08 02:59:13.246331 (Thread-4 (worker)): 02:59:13  Writing injected SQL for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube"
+2025-03-08 02:59:13.247057 (Thread-4 (worker)): 02:59:13  Began executing node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+2025-03-08 02:59:13.250434 (Thread-4 (worker)): 02:59:13  Opening a new connection, currently in state closed
+2025-03-08 02:59:13.491660 (Thread-4 (worker)): 02:59:13  Writing runtime sql for node "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube"
+2025-03-08 02:59:13.492860 (Thread-4 (worker)): 02:59:13  On model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Hubspot_Leads_AdsAccounts_Consolidated_YouTube`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      --hubspot_leads_ads_accounts_consolidated_youtube.sql
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT *
+  --FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Hubspot_Leads`
+  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'youtube')
+    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+),
+
+date_scaffold AS (
+  SELECT 
+    LEAST(
+      MIN(hl.Date), 
+      MIN(hl.Retained_Date), 
+      MIN(fa.Date)
+    ) AS start_date,
+    GREATEST(
+      MAX(hl.Date), 
+      MAX(hl.Retained_Date), 
+      MAX(fa.Date)
+    ) AS end_date
+  FROM filtered_hubspot_leads AS hl
+  CROSS JOIN `rare-guide-433209-e6`.`AdAccounts`.`YouTube Ads` AS fa
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_scaffold, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+youtube_ads_aggregated AS (
+  SELECT
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS YouTubeAds_Cost
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`YouTube Ads`
+  GROUP BY Date
+),
+
+leads_created_metrics AS (
+  SELECT
+    Date AS Aggregation_Date,
+    COUNT(CASE WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') THEN 1 END) AS Monthly_Leads,
+    COUNT(CASE WHEN _New__Marketing_Lead_Status = 'Qualified' THEN 1 END) AS Monthly_Qualified_Leads,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained'
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS In_Period_Retained,
+    /* CHANGED: Expanded window by 1 day on both ends */
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained' 
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+            THEN 1 
+          END) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY Date
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(fa.YouTubeAds_Cost, 0) AS YouTubeAds_Cost,
+    -- Numeric date for window functions
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN youtube_ads_aggregated AS fa
+    ON ad.Aggregation_Date = fa.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+),
+
+aggregated_metrics AS (
+  SELECT
+    *,
+    -- Annual Metrics (unchanged)
+    SUM(YouTubeAds_Cost) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(In_Period_Retained) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics (unchanged except for retained)
+    SUM(YouTubeAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPQL,
+    /* CHANGED: Expanded window by 1 day on both ends */
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
+    ) AS Rolling_60_Retained,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics (unchanged except for retained)
+    SUM(YouTubeAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPQL,
+    /* CHANGED: Expanded window by 1 day on both ends */
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
+    ) AS Rolling_365_Retained,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPA
+  FROM base_data
+)
+
+SELECT 
+  Aggregation_Date,
+  YouTubeAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_Retained,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_Retained,
+  Rolling_365_CPA
+FROM aggregated_metrics
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 02:59:13.865549 (Thread-4 (worker)): 02:59:13  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:71d140b9-bee2-4178-940e-e1c3bdc97dcb&page=queryresults
+2025-03-08 02:59:42.283775 (Thread-2 (worker)): 02:59:42  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:c73b13c9-a5c3-45d1-9212-55abebc2248e&page=queryresults
+2025-03-08 02:59:42.286876 (Thread-2 (worker)): 02:59:42  Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Google (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql
+2025-03-08 02:59:42.287715 (Thread-2 (worker)): 02:59:42  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06d2b1e50>]}
+2025-03-08 02:59:42.288447 (Thread-2 (worker)): 02:59:42  2 of 20 ERROR creating sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_Google  [[31mERROR[0m in 275.31s]
+2025-03-08 02:59:42.289155 (Thread-2 (worker)): 02:59:42  Finished running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 02:59:42.289904 (Thread-2 (worker)): 02:59:42  Began running node model.marketing_dbt.Hubspot_Leads_Campaign_Ads
+2025-03-08 02:59:42.290452 (Thread-7 (_handle_results)): 02:59:42  Marking all children of 'model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google' to be skipped because of status 'error'.  Reason: Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Google (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql.
+2025-03-08 02:59:42.291414 (Thread-2 (worker)): 02:59:42  6 of 20 START sql table model AdAccounts_mart.Hubspot_Leads_Campaign_Ads ....... [RUN]
+2025-03-08 02:59:42.292159 (Thread-2 (worker)): 02:59:42  Re-using an available connection from the pool (formerly model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Google, now model.marketing_dbt.Hubspot_Leads_Campaign_Ads)
+2025-03-08 02:59:42.292644 (Thread-2 (worker)): 02:59:42  Began compiling node model.marketing_dbt.Hubspot_Leads_Campaign_Ads
+2025-03-08 02:59:42.294838 (Thread-2 (worker)): 02:59:42  Writing injected SQL for node "model.marketing_dbt.Hubspot_Leads_Campaign_Ads"
+2025-03-08 02:59:42.295533 (Thread-2 (worker)): 02:59:42  Began executing node model.marketing_dbt.Hubspot_Leads_Campaign_Ads
+2025-03-08 02:59:42.296859 (Thread-2 (worker)): 02:59:42  Opening a new connection, currently in state closed
+2025-03-08 02:59:42.536499 (Thread-2 (worker)): 02:59:42  Writing runtime sql for node "model.marketing_dbt.Hubspot_Leads_Campaign_Ads"
+2025-03-08 02:59:42.537536 (Thread-2 (worker)): 02:59:42  On model.marketing_dbt.Hubspot_Leads_Campaign_Ads: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Hubspot_Leads_Campaign_Ads"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Hubspot_Leads_Campaign_Ads`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      --Hubspot_Leads_Campaign_Ads.sql
+
+
+
+WITH base_data AS (
+  SELECT
+    Date,
+    CASE
+      WHEN LOWER(Source_Traffic) LIKE '%facebook%' THEN 'Facebook'
+      WHEN LOWER(Source_Traffic) LIKE '%tiktok%' THEN 'TikTok'
+      WHEN LOWER(Source_Traffic) LIKE '%youtube%' THEN 'YouTube'
+      WHEN LOWER(Source_Traffic) LIKE '%google%' THEN 'Google'
+      ELSE Source_Traffic
+    END AS Source_Traffic,
+    Source_Campaign, 
+    Source_Ad,
+    Source_Adset, 
+    Last_Keywords,
+    COUNT(CASE 
+            WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') 
+                 AND LOWER(Source_Traffic) NOT LIKE '%organic%' 
+            THEN 1 
+          END) AS Total_Leads,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%' 
+                 AND _New__Marketing_Lead_Status = 'Qualified' 
+            THEN 1 
+          END) AS Qualified_Leads,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%' 
+                 AND Contact_lead_status = 'Retained'
+                 AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS Total_Retained,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%'
+                 AND Contact_lead_status = 'Retained' 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) <= 60 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) >= 0
+            THEN 1 
+          END) AS Rolling_60_Retained,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%'
+                 AND Contact_lead_status = 'Retained' 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) <= 365 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) >= 0
+            THEN 1 
+          END) AS Rolling_365_Retained
+  FROM
+    `rare-guide-433209-e6`.`AdAccounts`.`Hubspot_Leads` 
+  GROUP BY 1,2,3,4,5,6
+)
+
+SELECT
+  *
+FROM
+  base_data
+ORDER BY
+  Date
+    );
+  
+2025-03-08 02:59:42.909494 (Thread-2 (worker)): 02:59:42  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:631c614e-a612-44fe-9c0f-2b293b50eb2c&page=queryresults
+2025-03-08 02:59:59.736040 (Thread-1 (worker)): 02:59:59  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:9c72ba47-d493-47ef-8ffe-db0a0e87ccf1&page=queryresults
+2025-03-08 02:59:59.739148 (Thread-1 (worker)): 02:59:59  Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Facebook (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql
+2025-03-08 02:59:59.739987 (Thread-1 (worker)): 02:59:59  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee0562bc210>]}
+2025-03-08 02:59:59.740718 (Thread-1 (worker)): 02:59:59  1 of 20 ERROR creating sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_Facebook  [[31mERROR[0m in 292.76s]
+2025-03-08 02:59:59.741502 (Thread-1 (worker)): 02:59:59  Finished running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 02:59:59.742262 (Thread-1 (worker)): 02:59:59  Began running node model.marketing_dbt.LLA_FacebookAds
+2025-03-08 02:59:59.742876 (Thread-1 (worker)): 02:59:59  7 of 20 START sql table model AdAccounts_stg.LLA_FacebookAds ................... [RUN]
+2025-03-08 02:59:59.743679 (Thread-7 (_handle_results)): 02:59:59  Marking all children of 'model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook' to be skipped because of status 'error'.  Reason: Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Facebook (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql.
+2025-03-08 02:59:59.744325 (Thread-1 (worker)): 02:59:59  Re-using an available connection from the pool (formerly model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Facebook, now model.marketing_dbt.LLA_FacebookAds)
+2025-03-08 02:59:59.745311 (Thread-1 (worker)): 02:59:59  Began compiling node model.marketing_dbt.LLA_FacebookAds
+2025-03-08 02:59:59.747048 (Thread-1 (worker)): 02:59:59  Writing injected SQL for node "model.marketing_dbt.LLA_FacebookAds"
+2025-03-08 02:59:59.747846 (Thread-1 (worker)): 02:59:59  Began executing node model.marketing_dbt.LLA_FacebookAds
+2025-03-08 02:59:59.749216 (Thread-1 (worker)): 02:59:59  Opening a new connection, currently in state closed
+2025-03-08 03:00:00.024458 (Thread-1 (worker)): 03:00:00  Writing runtime sql for node "model.marketing_dbt.LLA_FacebookAds"
+2025-03-08 03:00:00.025506 (Thread-1 (worker)): 03:00:00  On model.marketing_dbt.LLA_FacebookAds: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.LLA_FacebookAds"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`LLA_FacebookAds`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Facebook Ads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:00:00.383766 (Thread-1 (worker)): 03:00:00  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:da1d1e7b-f5dc-4c2f-b6d0-b0f4010aeed8&page=queryresults
+2025-03-08 03:00:09.293429 (Thread-3 (worker)): 03:00:09  BigQuery adapter: Unhandled error while running:
+/* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Hubspot_Leads_AdsAccounts_Consolidated_Table`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      --Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT 
+    hl.* EXCEPT (Date, Retained_Date),
+    hl.Date AS Created_Date,
+    hl.Retained_Date
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Hubspot_Leads` AS hl
+  WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube|tiktok')
+    AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
+),
+
+retained_leads AS (
+  SELECT
+    Created_Date,
+    Retained_Date
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+),
+
+date_limits AS (
+  SELECT 
+    MIN(dt) AS start_date,
+    MAX(dt) AS end_date
+  FROM (
+    SELECT Created_Date AS dt FROM filtered_hubspot_leads
+    UNION ALL SELECT Retained_Date FROM filtered_hubspot_leads
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Facebook Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Google Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Tiktok Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`YouTube Ads`
+  )
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_limits, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+ads_costs AS (
+  SELECT 
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS Total_Ad_Cost
+  FROM (
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Facebook Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Google Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Tiktok Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`YouTube Ads`
+  )
+  GROUP BY 1
+),
+
+leads_created_metrics AS (
+  SELECT
+    Created_Date AS Aggregation_Date,
+    COUNTIF(Jot_Form_Date IS NULL OR Jot_Form_Date = '') AS Monthly_Leads,
+    COUNTIF(_New__Marketing_Lead_Status = 'Qualified') AS Monthly_Qualified_Leads,
+    COUNTIF(
+      Contact_lead_status = 'Retained'
+      AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Created_Date)
+    ) AS In_Period_Retained,
+    COUNTIF(
+      Contact_lead_status = 'Retained' 
+      AND DATE_DIFF(Retained_Date, Created_Date, DAY) BETWEEN -1 AND 61
+    ) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY 1
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY 1
+),
+
+rolling_retained AS (
+  SELECT
+    ad.Aggregation_Date,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_60_Retained,
+    COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_365_Retained
+  FROM all_dates ad
+  LEFT JOIN retained_leads rl
+    ON rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
+  GROUP BY 1
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
+    COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
+    COALESCE(ac.Total_Ad_Cost, 0) AS Total_Ad_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+  LEFT JOIN rolling_retained rr
+    ON ad.Aggregation_Date = rr.Aggregation_Date
+  LEFT JOIN ads_costs AS ac
+    ON ad.Aggregation_Date = ac.Aggregation_Date
+),
+
+window_calculations AS (
+  SELECT
+    *,
+    SUM(Total_Ad_Cost) OVER annual AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER annual AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER annual AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(Monthly_Qualified_Leads) OVER annual
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER annual AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(In_Period_Retained) OVER annual
+    ) AS Annual_CPA,
+
+    SUM(Total_Ad_Cost) OVER rolling_60d AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_60d AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_60d AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_60d
+    ) AS Rolling_60_CPQL,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(In_Period_Retained) OVER rolling_60d
+    ) AS Rolling_60_CPA,
+
+    SUM(Total_Ad_Cost) OVER rolling_365d AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_365d AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_365d AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_365d
+    ) AS Rolling_365_CPQL,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(In_Period_Retained) OVER rolling_365d
+    ) AS Rolling_365_CPA
+  FROM base_data
+  WINDOW
+    annual AS (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) 
+      ORDER BY Aggregation_Date
+    ),
+    rolling_60d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ),
+    rolling_365d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    )
+)
+
+SELECT * EXCEPT (aggregation_date_num)
+FROM window_calculations
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 03:00:09.294700 (Thread-3 (worker)): 03:00:09  BigQuery adapter: Operation did not complete within the designated timeout of 300 seconds.
+2025-03-08 03:00:09.297761 (Thread-3 (worker)): 03:00:09  Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)
+  Operation did not complete within the designated timeout of 300 seconds.
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+2025-03-08 03:00:09.298914 (Thread-3 (worker)): 03:00:09  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06be3de10>]}
+2025-03-08 03:00:09.299817 (Thread-3 (worker)): 03:00:09  3 of 20 ERROR creating sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_Table  [[31mERROR[0m in 302.32s]
+2025-03-08 03:00:09.300810 (Thread-3 (worker)): 03:00:09  Finished running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 03:00:09.301838 (Thread-3 (worker)): 03:00:09  Began running node model.marketing_dbt.LLA_GoogleAds
+2025-03-08 03:00:09.302392 (Thread-7 (_handle_results)): 03:00:09  Marking all children of 'model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table' to be skipped because of status 'error'.  Reason: Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)
+  Operation did not complete within the designated timeout of 300 seconds.
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql.
+2025-03-08 03:00:09.303439 (Thread-3 (worker)): 03:00:09  8 of 20 START sql table model AdAccounts_stg.LLA_GoogleAds ..................... [RUN]
+2025-03-08 03:00:09.304434 (Thread-3 (worker)): 03:00:09  Re-using an available connection from the pool (formerly model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_Table, now model.marketing_dbt.LLA_GoogleAds)
+2025-03-08 03:00:09.305083 (Thread-3 (worker)): 03:00:09  Began compiling node model.marketing_dbt.LLA_GoogleAds
+2025-03-08 03:00:09.307173 (Thread-3 (worker)): 03:00:09  Writing injected SQL for node "model.marketing_dbt.LLA_GoogleAds"
+2025-03-08 03:00:09.308068 (Thread-3 (worker)): 03:00:09  Began executing node model.marketing_dbt.LLA_GoogleAds
+2025-03-08 03:00:09.309746 (Thread-3 (worker)): 03:00:09  Opening a new connection, currently in state closed
+2025-03-08 03:00:09.606938 (Thread-3 (worker)): 03:00:09  Writing runtime sql for node "model.marketing_dbt.LLA_GoogleAds"
+2025-03-08 03:00:09.607929 (Thread-3 (worker)): 03:00:09  On model.marketing_dbt.LLA_GoogleAds: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.LLA_GoogleAds"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`LLA_GoogleAds`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Google Ads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:00:10.028146 (Thread-3 (worker)): 03:00:10  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:ca469986-0306-4c18-b101-5e4634139ab2&page=queryresults
+2025-03-08 03:01:13.557246 (Thread-4 (worker)): 03:01:13  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:71d140b9-bee2-4178-940e-e1c3bdc97dcb&page=queryresults
+2025-03-08 03:01:13.560822 (Thread-4 (worker)): 03:01:13  Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_YouTube (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql
+2025-03-08 03:01:13.561765 (Thread-4 (worker)): 03:01:13  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee0566e0d10>]}
+2025-03-08 03:01:13.562496 (Thread-4 (worker)): 03:01:13  5 of 20 ERROR creating sql table model AdAccounts_mart.Hubspot_Leads_AdsAccounts_Consolidated_YouTube  [[31mERROR[0m in 120.32s]
+2025-03-08 03:01:13.563175 (Thread-4 (worker)): 03:01:13  Finished running node model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+2025-03-08 03:01:13.563843 (Thread-4 (worker)): 03:01:13  Began running node model.marketing_dbt.LLA_Hubspot_Leads
+2025-03-08 03:01:13.564603 (Thread-7 (_handle_results)): 03:01:13  Marking all children of 'model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube' to be skipped because of status 'error'.  Reason: Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_YouTube (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql.
+2025-03-08 03:01:13.565685 (Thread-4 (worker)): 03:01:13  9 of 20 START sql table model AdAccounts_stg.LLA_Hubspot_Leads ................. [RUN]
+2025-03-08 03:01:13.566460 (Thread-4 (worker)): 03:01:13  Re-using an available connection from the pool (formerly model.marketing_dbt.Hubspot_Leads_AdsAccounts_Consolidated_YouTube, now model.marketing_dbt.LLA_Hubspot_Leads)
+2025-03-08 03:01:13.566923 (Thread-4 (worker)): 03:01:13  Began compiling node model.marketing_dbt.LLA_Hubspot_Leads
+2025-03-08 03:01:13.569202 (Thread-4 (worker)): 03:01:13  Writing injected SQL for node "model.marketing_dbt.LLA_Hubspot_Leads"
+2025-03-08 03:01:13.569906 (Thread-4 (worker)): 03:01:13  Began executing node model.marketing_dbt.LLA_Hubspot_Leads
+2025-03-08 03:01:13.571187 (Thread-4 (worker)): 03:01:13  Opening a new connection, currently in state closed
+2025-03-08 03:01:13.823381 (Thread-4 (worker)): 03:01:13  Writing runtime sql for node "model.marketing_dbt.LLA_Hubspot_Leads"
+2025-03-08 03:01:13.824290 (Thread-4 (worker)): 03:01:13  On model.marketing_dbt.LLA_Hubspot_Leads: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.LLA_Hubspot_Leads"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`LLA_Hubspot_Leads`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Hubspot_Leads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:01:14.222227 (Thread-4 (worker)): 03:01:14  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:d2bb196c-2ae2-484a-9f89-ea1c7e233db8&page=queryresults
+2025-03-08 03:01:41.721840 (Thread-2 (worker)): 03:01:41  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:631c614e-a612-44fe-9c0f-2b293b50eb2c&page=queryresults
+2025-03-08 03:01:41.724803 (Thread-2 (worker)): 03:01:41  Database Error in model Hubspot_Leads_Campaign_Ads (models/mart/Hubspot_Leads_Campaign_Ads.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_Campaign_Ads.sql
+2025-03-08 03:01:41.725650 (Thread-2 (worker)): 03:01:41  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06b0504d0>]}
+2025-03-08 03:01:41.726373 (Thread-2 (worker)): 03:01:41  6 of 20 ERROR creating sql table model AdAccounts_mart.Hubspot_Leads_Campaign_Ads  [[31mERROR[0m in 119.43s]
+2025-03-08 03:01:41.727069 (Thread-2 (worker)): 03:01:41  Finished running node model.marketing_dbt.Hubspot_Leads_Campaign_Ads
+2025-03-08 03:01:41.727751 (Thread-2 (worker)): 03:01:41  Began running node model.marketing_dbt.LLA_TikTokAds
+2025-03-08 03:01:41.728408 (Thread-7 (_handle_results)): 03:01:41  Marking all children of 'model.marketing_dbt.Hubspot_Leads_Campaign_Ads' to be skipped because of status 'error'.  Reason: Database Error in model Hubspot_Leads_Campaign_Ads (models/mart/Hubspot_Leads_Campaign_Ads.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_Campaign_Ads.sql.
+2025-03-08 03:01:41.729577 (Thread-2 (worker)): 03:01:41  10 of 20 START sql table model AdAccounts_stg.LLA_TikTokAds .................... [RUN]
+2025-03-08 03:01:41.730389 (Thread-2 (worker)): 03:01:41  Re-using an available connection from the pool (formerly model.marketing_dbt.Hubspot_Leads_Campaign_Ads, now model.marketing_dbt.LLA_TikTokAds)
+2025-03-08 03:01:41.730877 (Thread-2 (worker)): 03:01:41  Began compiling node model.marketing_dbt.LLA_TikTokAds
+2025-03-08 03:01:41.732529 (Thread-2 (worker)): 03:01:41  Writing injected SQL for node "model.marketing_dbt.LLA_TikTokAds"
+2025-03-08 03:01:41.733228 (Thread-2 (worker)): 03:01:41  Began executing node model.marketing_dbt.LLA_TikTokAds
+2025-03-08 03:01:41.734605 (Thread-2 (worker)): 03:01:41  Opening a new connection, currently in state closed
+2025-03-08 03:01:42.132876 (Thread-2 (worker)): 03:01:42  Writing runtime sql for node "model.marketing_dbt.LLA_TikTokAds"
+2025-03-08 03:01:42.134005 (Thread-2 (worker)): 03:01:42  On model.marketing_dbt.LLA_TikTokAds: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.LLA_TikTokAds"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`LLA_TikTokAds`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Tiktok Ads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:01:42.505494 (Thread-2 (worker)): 03:01:42  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:9ad233bb-aeb7-46cc-836a-2ec9ca830681&page=queryresults
+2025-03-08 03:02:00.364484 (Thread-1 (worker)): 03:02:00  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:da1d1e7b-f5dc-4c2f-b6d0-b0f4010aeed8&page=queryresults
+2025-03-08 03:02:00.367573 (Thread-1 (worker)): 03:02:00  Database Error in model LLA_FacebookAds (models/stg/LLA_FacebookAds.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/stg/LLA_FacebookAds.sql
+2025-03-08 03:02:00.368362 (Thread-1 (worker)): 03:02:00  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06d4c8a10>]}
+2025-03-08 03:02:00.369109 (Thread-1 (worker)): 03:02:00  7 of 20 ERROR creating sql table model AdAccounts_stg.LLA_FacebookAds .......... [[31mERROR[0m in 120.62s]
+2025-03-08 03:02:00.369824 (Thread-1 (worker)): 03:02:00  Finished running node model.marketing_dbt.LLA_FacebookAds
+2025-03-08 03:02:00.370479 (Thread-1 (worker)): 03:02:00  Began running node model.marketing_dbt.LLA_YouTubeAds
+2025-03-08 03:02:00.371161 (Thread-7 (_handle_results)): 03:02:00  Marking all children of 'model.marketing_dbt.LLA_FacebookAds' to be skipped because of status 'error'.  Reason: Database Error in model LLA_FacebookAds (models/stg/LLA_FacebookAds.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/stg/LLA_FacebookAds.sql.
+2025-03-08 03:02:00.371895 (Thread-1 (worker)): 03:02:00  11 of 20 START sql table model AdAccounts_stg.LLA_YouTubeAds ................... [RUN]
+2025-03-08 03:02:00.372649 (Thread-1 (worker)): 03:02:00  Re-using an available connection from the pool (formerly model.marketing_dbt.LLA_FacebookAds, now model.marketing_dbt.LLA_YouTubeAds)
+2025-03-08 03:02:00.373126 (Thread-1 (worker)): 03:02:00  Began compiling node model.marketing_dbt.LLA_YouTubeAds
+2025-03-08 03:02:00.374858 (Thread-1 (worker)): 03:02:00  Writing injected SQL for node "model.marketing_dbt.LLA_YouTubeAds"
+2025-03-08 03:02:00.375548 (Thread-1 (worker)): 03:02:00  Began executing node model.marketing_dbt.LLA_YouTubeAds
+2025-03-08 03:02:00.377361 (Thread-1 (worker)): 03:02:00  Opening a new connection, currently in state closed
+2025-03-08 03:02:00.642398 (Thread-1 (worker)): 03:02:00  Writing runtime sql for node "model.marketing_dbt.LLA_YouTubeAds"
+2025-03-08 03:02:00.643320 (Thread-1 (worker)): 03:02:00  On model.marketing_dbt.LLA_YouTubeAds: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.LLA_YouTubeAds"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`LLA_YouTubeAds`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.YouTube Ads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:02:01.062348 (Thread-1 (worker)): 03:02:01  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:63d4c8d8-3c65-4c66-8d19-e8ba1500d0b5&page=queryresults
+2025-03-08 03:02:09.237390 (Thread-2 (worker)): 03:02:09  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee054081f50>]}
+2025-03-08 03:02:09.238223 (Thread-2 (worker)): 03:02:09  10 of 20 OK created sql table model AdAccounts_stg.LLA_TikTokAds ............... [[32mCREATE TABLE (524.0 rows, 17.7 KiB processed)[0m in 27.51s]
+2025-03-08 03:02:09.238960 (Thread-2 (worker)): 03:02:09  Finished running node model.marketing_dbt.LLA_TikTokAds
+2025-03-08 03:02:09.239673 (Thread-2 (worker)): 03:02:09  Began running node model.marketing_dbt.Rio_FacebookAds
+2025-03-08 03:02:09.240333 (Thread-2 (worker)): 03:02:09  12 of 20 START sql table model AdAccounts_stg.Rio_FacebookAds .................. [RUN]
+2025-03-08 03:02:09.240918 (Thread-2 (worker)): 03:02:09  Re-using an available connection from the pool (formerly model.marketing_dbt.LLA_TikTokAds, now model.marketing_dbt.Rio_FacebookAds)
+2025-03-08 03:02:09.241368 (Thread-2 (worker)): 03:02:09  Began compiling node model.marketing_dbt.Rio_FacebookAds
+2025-03-08 03:02:09.242885 (Thread-2 (worker)): 03:02:09  Writing injected SQL for node "model.marketing_dbt.Rio_FacebookAds"
+2025-03-08 03:02:09.243554 (Thread-2 (worker)): 03:02:09  Began executing node model.marketing_dbt.Rio_FacebookAds
+2025-03-08 03:02:09.244813 (Thread-2 (worker)): 03:02:09  Opening a new connection, currently in state closed
+2025-03-08 03:02:09.287380 (Thread-3 (worker)): 03:02:09  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee0561916d0>]}
+2025-03-08 03:02:09.288155 (Thread-3 (worker)): 03:02:09  8 of 20 OK created sql table model AdAccounts_stg.LLA_GoogleAds ................ [[32mCREATE TABLE (666.0 rows, 35.5 KiB processed)[0m in 119.98s]
+2025-03-08 03:02:09.288872 (Thread-3 (worker)): 03:02:09  Finished running node model.marketing_dbt.LLA_GoogleAds
+2025-03-08 03:02:09.289648 (Thread-3 (worker)): 03:02:09  Began running node model.marketing_dbt.Rio_GoogleAds
+2025-03-08 03:02:09.290311 (Thread-3 (worker)): 03:02:09  13 of 20 START sql table model AdAccounts_stg.Rio_GoogleAds .................... [RUN]
+2025-03-08 03:02:09.290933 (Thread-3 (worker)): 03:02:09  Re-using an available connection from the pool (formerly model.marketing_dbt.LLA_GoogleAds, now model.marketing_dbt.Rio_GoogleAds)
+2025-03-08 03:02:09.291713 (Thread-3 (worker)): 03:02:09  Began compiling node model.marketing_dbt.Rio_GoogleAds
+2025-03-08 03:02:09.294110 (Thread-3 (worker)): 03:02:09  Writing injected SQL for node "model.marketing_dbt.Rio_GoogleAds"
+2025-03-08 03:02:09.295130 (Thread-3 (worker)): 03:02:09  Began executing node model.marketing_dbt.Rio_GoogleAds
+2025-03-08 03:02:09.297115 (Thread-3 (worker)): 03:02:09  Opening a new connection, currently in state closed
+2025-03-08 03:02:09.356610 (Thread-1 (worker)): 03:02:09  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee06b70b450>]}
+2025-03-08 03:02:09.357346 (Thread-1 (worker)): 03:02:09  11 of 20 OK created sql table model AdAccounts_stg.LLA_YouTubeAds .............. [[32mCREATE TABLE (626.0 rows, 34.1 KiB processed)[0m in 8.98s]
+2025-03-08 03:02:09.358459 (Thread-1 (worker)): 03:02:09  Finished running node model.marketing_dbt.LLA_YouTubeAds
+2025-03-08 03:02:09.359384 (Thread-1 (worker)): 03:02:09  Began running node model.marketing_dbt.Rio_Hubspot_Leads
+2025-03-08 03:02:09.360069 (Thread-1 (worker)): 03:02:09  14 of 20 START sql table model AdAccounts_stg.Rio_Hubspot_Leads ................ [RUN]
+2025-03-08 03:02:09.360634 (Thread-1 (worker)): 03:02:09  Re-using an available connection from the pool (formerly model.marketing_dbt.LLA_YouTubeAds, now model.marketing_dbt.Rio_Hubspot_Leads)
+2025-03-08 03:02:09.361089 (Thread-1 (worker)): 03:02:09  Began compiling node model.marketing_dbt.Rio_Hubspot_Leads
+2025-03-08 03:02:09.362589 (Thread-1 (worker)): 03:02:09  Writing injected SQL for node "model.marketing_dbt.Rio_Hubspot_Leads"
+2025-03-08 03:02:09.363366 (Thread-1 (worker)): 03:02:09  Began executing node model.marketing_dbt.Rio_Hubspot_Leads
+2025-03-08 03:02:09.364698 (Thread-1 (worker)): 03:02:09  Opening a new connection, currently in state closed
+2025-03-08 03:02:09.592303 (Thread-3 (worker)): 03:02:09  Writing runtime sql for node "model.marketing_dbt.Rio_GoogleAds"
+2025-03-08 03:02:09.593275 (Thread-3 (worker)): 03:02:09  On model.marketing_dbt.Rio_GoogleAds: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_GoogleAds"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`Rio_GoogleAds`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Rio_Google_Ads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:02:09.623081 (Thread-1 (worker)): 03:02:09  Writing runtime sql for node "model.marketing_dbt.Rio_Hubspot_Leads"
+2025-03-08 03:02:09.623790 (Thread-1 (worker)): 03:02:09  On model.marketing_dbt.Rio_Hubspot_Leads: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_Hubspot_Leads"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`Rio_Hubspot_Leads`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Rio_Hubspot_Leads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:02:09.915129 (Thread-3 (worker)): 03:02:09  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:e57cbe7d-0f1e-42fb-90a6-aef7a079eca0&page=queryresults
+2025-03-08 03:02:09.928570 (Thread-2 (worker)): 03:02:09  Writing runtime sql for node "model.marketing_dbt.Rio_FacebookAds"
+2025-03-08 03:02:09.929428 (Thread-2 (worker)): 03:02:09  On model.marketing_dbt.Rio_FacebookAds: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_FacebookAds"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`Rio_FacebookAds`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Rio_Facebook_Ads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:02:10.041092 (Thread-1 (worker)): 03:02:10  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:6994cd0c-3915-4639-bb09-1e8a1f82263e&page=queryresults
+2025-03-08 03:02:10.522436 (Thread-2 (worker)): 03:02:10  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:be82db03-3624-4ced-8903-8013f9f7c06e&page=queryresults
+2025-03-08 03:02:14.136556 (Thread-3 (worker)): 03:02:14  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016dac310>]}
+2025-03-08 03:02:14.137385 (Thread-3 (worker)): 03:02:14  13 of 20 OK created sql table model AdAccounts_stg.Rio_GoogleAds ............... [[32mCREATE TABLE (82.0 rows, 9.0 KiB processed)[0m in 4.85s]
+2025-03-08 03:02:14.138150 (Thread-3 (worker)): 03:02:14  Finished running node model.marketing_dbt.Rio_GoogleAds
+2025-03-08 03:02:14.139071 (Thread-3 (worker)): 03:02:14  Began running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 03:02:14.139751 (Thread-3 (worker)): 03:02:14  15 of 20 START sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook  [RUN]
+2025-03-08 03:02:14.140352 (Thread-3 (worker)): 03:02:14  Re-using an available connection from the pool (formerly model.marketing_dbt.Rio_GoogleAds, now model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook)
+2025-03-08 03:02:14.140857 (Thread-3 (worker)): 03:02:14  Began compiling node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 03:02:14.144100 (Thread-3 (worker)): 03:02:14  Writing injected SQL for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook"
+2025-03-08 03:02:14.144834 (Thread-3 (worker)): 03:02:14  Began executing node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 03:02:14.146261 (Thread-3 (worker)): 03:02:14  Opening a new connection, currently in state closed
+2025-03-08 03:02:14.448867 (Thread-2 (worker)): 03:02:14  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016d95550>]}
+2025-03-08 03:02:14.449772 (Thread-2 (worker)): 03:02:14  12 of 20 OK created sql table model AdAccounts_stg.Rio_FacebookAds ............. [[32mCREATE TABLE (554.0 rows, 22.8 KiB processed)[0m in 5.21s]
+2025-03-08 03:02:14.450511 (Thread-2 (worker)): 03:02:14  Finished running node model.marketing_dbt.Rio_FacebookAds
+2025-03-08 03:02:14.451254 (Thread-2 (worker)): 03:02:14  Began running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 03:02:14.451958 (Thread-2 (worker)): 03:02:14  16 of 20 START sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google  [RUN]
+2025-03-08 03:02:14.452562 (Thread-2 (worker)): 03:02:14  Re-using an available connection from the pool (formerly model.marketing_dbt.Rio_FacebookAds, now model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google)
+2025-03-08 03:02:14.453056 (Thread-2 (worker)): 03:02:14  Began compiling node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 03:02:14.456404 (Thread-2 (worker)): 03:02:14  Writing injected SQL for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google"
+2025-03-08 03:02:14.457177 (Thread-2 (worker)): 03:02:14  Began executing node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 03:02:14.458529 (Thread-2 (worker)): 03:02:14  Opening a new connection, currently in state closed
+2025-03-08 03:02:14.499452 (Thread-3 (worker)): 03:02:14  Writing runtime sql for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook"
+2025-03-08 03:02:14.500699 (Thread-3 (worker)): 03:02:14  On model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      -- Rio_hubspot_leads_ads_accounts_consolidated_facebook.sql
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT *
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Hubspot_Leads`
+  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'facebook')
+    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+    AND REGEXP_CONTAINS(LOWER(Case_Profile), r'employment')  
+),
+
+date_scaffold AS (
+  SELECT 
+    LEAST(
+      MIN(hl.Date), 
+      MIN(hl.Retained_Date), 
+      MIN(fa.Date)
+    ) AS start_date,
+    GREATEST(
+      MAX(hl.Date), 
+      MAX(hl.Retained_Date), 
+      MAX(fa.Date)
+    ) AS end_date
+  FROM filtered_hubspot_leads AS hl
+  CROSS JOIN `rare-guide-433209-e6`.`AdAccounts`.`Rio_Facebook_Ads` AS fa  
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_scaffold, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+facebook_ads_aggregated AS (
+  SELECT
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS FacebookAds_Cost
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Facebook_Ads`  
+  GROUP BY Date
+),
+
+leads_created_metrics AS (
+  SELECT
+    Date AS Aggregation_Date,
+    COUNT(1) AS Monthly_Leads,  
+    COUNT(CASE WHEN Marketing_Lead_Status = 'qualified' THEN 1 END) AS Monthly_Qualified_Leads,  
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained'
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS In_Period_Retained,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained' 
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 59
+            THEN 1 
+          END) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY Date
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(fa.FacebookAds_Cost, 0) AS FacebookAds_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN facebook_ads_aggregated AS fa
+    ON ad.Aggregation_Date = fa.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+),
+
+aggregated_metrics AS (
+  SELECT
+    *,
+    SUM(FacebookAds_Cost) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(In_Period_Retained) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics
+    SUM(FacebookAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPQL,
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Retained,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics
+    SUM(FacebookAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPQL,
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Retained,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPA
+  FROM base_data
+)
+
+SELECT 
+  Aggregation_Date,
+  FacebookAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_Retained,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_Retained,
+  Rolling_365_CPA
+FROM aggregated_metrics
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 03:02:14.682707 (Thread-2 (worker)): 03:02:14  Writing runtime sql for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google"
+2025-03-08 03:02:14.683859 (Thread-2 (worker)): 03:02:14  On model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      -- Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google.sql
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT *
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Hubspot_Leads`
+  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'google')
+    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+    AND REGEXP_CONTAINS(LOWER(Case_Profile), r'employment')  
+),
+
+date_scaffold AS (
+  SELECT 
+    LEAST(
+      MIN(hl.Date), 
+      MIN(hl.Retained_Date), 
+      MIN(fa.Date)
+    ) AS start_date,
+    GREATEST(
+      MAX(hl.Date), 
+      MAX(hl.Retained_Date), 
+      MAX(fa.Date)
+    ) AS end_date
+  FROM filtered_hubspot_leads AS hl
+  CROSS JOIN `rare-guide-433209-e6`.`AdAccounts`.`Rio_Google_Ads` AS fa  
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_scaffold, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+google_ads_aggregated AS (
+  SELECT
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS GoogleAds_Cost
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Google_Ads`  
+  GROUP BY Date
+),
+
+leads_created_metrics AS (
+  SELECT
+    Date AS Aggregation_Date,
+    COUNT(1) AS Monthly_Leads,  
+    COUNT(CASE WHEN Marketing_Lead_Status = 'qualified' THEN 1 END) AS Monthly_Qualified_Leads,  
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained'
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS In_Period_Retained,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained' 
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 59
+            THEN 1 
+          END) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY Date
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(fa.GoogleAds_Cost, 0) AS GoogleAds_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN google_ads_aggregated AS fa
+    ON ad.Aggregation_Date = fa.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+),
+
+aggregated_metrics AS (
+  SELECT
+    *,
+    SUM(GoogleAds_Cost) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(In_Period_Retained) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics
+    SUM(GoogleAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPQL,
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Retained,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics
+    SUM(GoogleAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPQL,
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Retained,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPA
+  FROM base_data
+)
+
+SELECT 
+  Aggregation_Date,
+  GoogleAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_Retained,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_Retained,
+  Rolling_365_CPA
+FROM aggregated_metrics
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 03:02:14.872306 (Thread-3 (worker)): 03:02:14  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:ecaf7020-60ed-45e6-8240-ae9067c1798d&page=queryresults
+2025-03-08 03:02:15.173287 (Thread-2 (worker)): 03:02:15  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:f37f745b-9aac-4185-87bb-6fbdad8b0be7&page=queryresults
+2025-03-08 03:02:41.524589 (Thread-1 (worker)): 03:02:41  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016dac210>]}
+2025-03-08 03:02:41.525412 (Thread-1 (worker)): 03:02:41  14 of 20 OK created sql table model AdAccounts_stg.Rio_Hubspot_Leads ........... [[32mCREATE TABLE (86.2k rows, 30.1 MiB processed)[0m in 32.16s]
+2025-03-08 03:02:41.526155 (Thread-1 (worker)): 03:02:41  Finished running node model.marketing_dbt.Rio_Hubspot_Leads
+2025-03-08 03:02:41.526890 (Thread-1 (worker)): 03:02:41  Began running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 03:02:41.527542 (Thread-1 (worker)): 03:02:41  17 of 20 START sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table  [RUN]
+2025-03-08 03:02:41.528121 (Thread-1 (worker)): 03:02:41  Re-using an available connection from the pool (formerly model.marketing_dbt.Rio_Hubspot_Leads, now model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table)
+2025-03-08 03:02:41.528601 (Thread-1 (worker)): 03:02:41  Began compiling node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 03:02:41.532138 (Thread-1 (worker)): 03:02:41  Writing injected SQL for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table"
+2025-03-08 03:02:41.532840 (Thread-1 (worker)): 03:02:41  Began executing node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 03:02:41.534424 (Thread-1 (worker)): 03:02:41  Opening a new connection, currently in state closed
+2025-03-08 03:02:41.780047 (Thread-1 (worker)): 03:02:41  Writing runtime sql for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table"
+2025-03-08 03:02:41.781102 (Thread-1 (worker)): 03:02:41  On model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      -- Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT 
+    hl.* EXCEPT (Date, Retained_Date),
+    hl.Date AS Created_Date,
+    hl.Retained_Date
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Hubspot_Leads` AS hl
+  WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube')
+    AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
+    AND REGEXP_CONTAINS(LOWER(hl.Case_Profile), r'employment')
+),
+
+date_limits AS (
+  SELECT 
+    MIN(dt) AS start_date,
+    MAX(dt) AS end_date
+  FROM (
+    SELECT Created_Date AS dt FROM filtered_hubspot_leads
+    UNION ALL SELECT Retained_Date FROM filtered_hubspot_leads
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Facebook_Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Google_Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_YouTube_Ads`
+  )
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_limits, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+ads_costs AS (
+  SELECT 
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS Total_Ad_Cost
+  FROM (
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Facebook_Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Google_Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_YouTube_Ads`
+  )
+  GROUP BY 1
+),
+
+leads_created_metrics AS (
+  SELECT
+    Created_Date AS Aggregation_Date,
+    COUNT(1) AS Monthly_Leads,
+    COUNTIF(Marketing_Lead_Status = 'qualified') AS Monthly_Qualified_Leads,
+    COUNTIF(
+      Contact_lead_status = 'Retained'
+      AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Created_Date)
+    ) AS In_Period_Retained,
+    COUNTIF(
+      Contact_lead_status = 'Retained' 
+      AND DATE_DIFF(Retained_Date, Created_Date, DAY) BETWEEN -1 AND 61
+    ) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY 1
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY 1
+),
+
+-- Rest of the model remains identical from base_data onward...
+-- [The rest of the original code remains unchanged]
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(ac.Total_Ad_Cost, 0) AS Total_Ad_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN leads_created_metrics AS lc USING (Aggregation_Date)
+  LEFT JOIN leads_retained_metrics AS lr USING (Aggregation_Date)
+  LEFT JOIN ads_costs AS ac USING (Aggregation_Date)
+),
+
+window_calculations AS (
+  SELECT
+    *,
+    -- Annual calculations
+    SUM(Total_Ad_Cost) OVER annual AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER annual AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER annual AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(Monthly_Qualified_Leads) OVER annual
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER annual AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(In_Period_Retained) OVER annual
+    ) AS Annual_CPA,
+
+    -- 60-day rolling calculations
+    SUM(Total_Ad_Cost) OVER rolling_60d AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_60d AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_60d AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_60d
+    ) AS Rolling_60_CPQL,
+    SUM(Retained_that_Month) OVER rolling_60d_retained AS Rolling_60_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(In_Period_Retained) OVER rolling_60d
+    ) AS Rolling_60_CPA,
+
+    -- 365-day rolling calculations
+    SUM(Total_Ad_Cost) OVER rolling_365d AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_365d AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_365d AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_365d
+    ) AS Rolling_365_CPQL,
+    SUM(Retained_that_Month) OVER rolling_365d_retained AS Rolling_365_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(In_Period_Retained) OVER rolling_365d
+    ) AS Rolling_365_CPA
+  FROM base_data
+  WINDOW
+    annual AS (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) 
+      ORDER BY Aggregation_Date
+    ),
+    rolling_60d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ),
+    rolling_60d_retained AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
+    ),
+    rolling_365d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ),
+    rolling_365d_retained AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
+    )
+)
+
+SELECT * EXCEPT (aggregation_date_num)
+FROM window_calculations
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 03:02:42.170670 (Thread-1 (worker)): 03:02:42  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:2d20eb92-28c5-4249-85df-403334ca4ed8&page=queryresults
+2025-03-08 03:02:50.510719 (Thread-4 (worker)): 03:02:50  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee056cd50d0>]}
+2025-03-08 03:02:50.511767 (Thread-4 (worker)): 03:02:50  9 of 20 OK created sql table model AdAccounts_stg.LLA_Hubspot_Leads ............ [[32mCREATE TABLE (225.7k rows, 69.3 MiB processed)[0m in 96.94s]
+2025-03-08 03:02:50.512959 (Thread-4 (worker)): 03:02:50  Finished running node model.marketing_dbt.LLA_Hubspot_Leads
+2025-03-08 03:02:50.514012 (Thread-4 (worker)): 03:02:50  Began running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+2025-03-08 03:02:50.514927 (Thread-4 (worker)): 03:02:50  18 of 20 START sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube  [RUN]
+2025-03-08 03:02:50.515744 (Thread-4 (worker)): 03:02:50  Re-using an available connection from the pool (formerly model.marketing_dbt.LLA_Hubspot_Leads, now model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube)
+2025-03-08 03:02:50.516478 (Thread-4 (worker)): 03:02:50  Began compiling node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+2025-03-08 03:02:50.520043 (Thread-4 (worker)): 03:02:50  Writing injected SQL for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube"
+2025-03-08 03:02:50.520974 (Thread-4 (worker)): 03:02:50  Began executing node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+2025-03-08 03:02:50.522534 (Thread-4 (worker)): 03:02:50  Opening a new connection, currently in state closed
+2025-03-08 03:02:50.744143 (Thread-4 (worker)): 03:02:50  Writing runtime sql for node "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube"
+2025-03-08 03:02:50.745623 (Thread-4 (worker)): 03:02:50  On model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      -- Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql
+
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT *
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Hubspot_Leads`
+  WHERE REGEXP_CONTAINS(LOWER(Source_Traffic), r'youtube')
+    AND NOT REGEXP_CONTAINS(LOWER(Source_Traffic), r'organic')
+    AND REGEXP_CONTAINS(LOWER(Case_Profile), r'employment')  
+),
+
+date_scaffold AS (
+  SELECT 
+    LEAST(
+      MIN(hl.Date), 
+      MIN(hl.Retained_Date), 
+      MIN(fa.Date)
+    ) AS start_date,
+    GREATEST(
+      MAX(hl.Date), 
+      MAX(hl.Retained_Date), 
+      MAX(fa.Date)
+    ) AS end_date
+  FROM filtered_hubspot_leads AS hl
+  CROSS JOIN `rare-guide-433209-e6`.`AdAccounts`.`Rio_YouTube_Ads` AS fa  
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_scaffold, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+youtube_ads_aggregated AS (
+  SELECT
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS YouTubeAds_Cost
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_YouTube_Ads`  
+  GROUP BY Date
+),
+
+leads_created_metrics AS (
+  SELECT
+    Date AS Aggregation_Date,
+    COUNT(1) AS Monthly_Leads,  
+    COUNT(CASE WHEN Marketing_Lead_Status = 'qualified' THEN 1 END) AS Monthly_Qualified_Leads,  
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained'
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS In_Period_Retained,
+    COUNT(CASE 
+            WHEN Contact_lead_status = 'Retained' 
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 59
+            THEN 1 
+          END) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY Date
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY Retained_Date
+),
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(fa.YouTubeAds_Cost, 0) AS YouTubeAds_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN youtube_ads_aggregated AS fa
+    ON ad.Aggregation_Date = fa.Aggregation_Date
+  LEFT JOIN leads_created_metrics AS lc
+    ON ad.Aggregation_Date = lc.Aggregation_Date
+  LEFT JOIN leads_retained_metrics AS lr
+    ON ad.Aggregation_Date = lr.Aggregation_Date
+),
+
+aggregated_metrics AS (
+  SELECT
+    *,
+    SUM(YouTubeAds_Cost) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+    ) AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      ),
+      SUM(In_Period_Retained) OVER (
+        PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) ORDER BY Aggregation_Date
+      )
+    ) AS Annual_CPA,
+
+    -- Rolling 60-Day Metrics
+    SUM(YouTubeAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPQL,
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ) AS Rolling_60_Retained,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_60_CPA,
+
+    -- Rolling 365-Day Metrics
+    SUM(YouTubeAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPQL,
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ) AS Rolling_365_Retained,
+    SAFE_DIVIDE(
+      SUM(YouTubeAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_365_CPA
+  FROM base_data
+)
+
+SELECT 
+  Aggregation_Date,
+  YouTubeAds_Cost,
+  Rolling_60_Ad_Spend,
+  Rolling_365_Ad_Spend,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_Retained,
+  Rolling_60_CPA,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_Retained,
+  Rolling_365_CPA
+FROM aggregated_metrics
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 03:02:51.137122 (Thread-4 (worker)): 03:02:51  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:b6016540-c6e2-4b63-9185-37971f2814a6&page=queryresults
+2025-03-08 03:03:09.088982 (Thread-3 (worker)): 03:03:09  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016c13a50>]}
+2025-03-08 03:03:09.089842 (Thread-3 (worker)): 03:03:09  15 of 20 OK created sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook  [[32mCREATE TABLE (554.0 rows, 90.4 MiB processed)[0m in 54.95s]
+2025-03-08 03:03:09.090562 (Thread-3 (worker)): 03:03:09  Finished running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook
+2025-03-08 03:03:09.091264 (Thread-3 (worker)): 03:03:09  Began running node model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads
+2025-03-08 03:03:09.091957 (Thread-3 (worker)): 03:03:09  19 of 20 START sql table model AdAccounts_mart.Rio_Hubspot_Leads_Campaign_Ads .. [RUN]
+2025-03-08 03:03:09.092531 (Thread-3 (worker)): 03:03:09  Re-using an available connection from the pool (formerly model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Facebook, now model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads)
+2025-03-08 03:03:09.093003 (Thread-3 (worker)): 03:03:09  Began compiling node model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads
+2025-03-08 03:03:09.094925 (Thread-3 (worker)): 03:03:09  Writing injected SQL for node "model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads"
+2025-03-08 03:03:09.095620 (Thread-3 (worker)): 03:03:09  Began executing node model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads
+2025-03-08 03:03:09.096918 (Thread-3 (worker)): 03:03:09  Opening a new connection, currently in state closed
+2025-03-08 03:03:09.326834 (Thread-3 (worker)): 03:03:09  Writing runtime sql for node "model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads"
+2025-03-08 03:03:09.327786 (Thread-3 (worker)): 03:03:09  On model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Rio_Hubspot_Leads_Campaign_Ads`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      --Rio_Hubspot_Leads_Campaign_Ads.sql
+
+
+
+WITH base_data AS (
+  SELECT
+    Date,
+    CASE
+      WHEN LOWER(Source_Traffic) LIKE '%facebook%' THEN 'Facebook'
+      WHEN LOWER(Source_Traffic) LIKE '%tiktok%' THEN 'TikTok'
+      WHEN LOWER(Source_Traffic) LIKE '%youtube%' THEN 'YouTube'
+      WHEN LOWER(Source_Traffic) LIKE '%google%' THEN 'Google'
+      ELSE Source_Traffic
+    END AS Source_Traffic,
+    Source_Campaign, 
+    Source_Ad,
+    Source_Adset, 
+    Last_Keywords,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%' 
+            THEN 1 
+          END) AS Total_Leads,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%' 
+                 AND Marketing_Lead_Status = 'Qualified' 
+            THEN 1 
+          END) AS Qualified_Leads,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%' 
+                 AND Contact_lead_status = 'Retained'
+                 AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            THEN 1 
+          END) AS Total_Retained,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%'
+                 AND Contact_lead_status = 'Retained' 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) <= 60 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) >= 0
+            THEN 1 
+          END) AS Rolling_60_Retained,
+    COUNT(CASE 
+            WHEN LOWER(Source_Traffic) NOT LIKE '%organic%'
+                 AND Contact_lead_status = 'Retained' 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) <= 365 
+                 AND DATE_DIFF(Retained_Date, Date, DAY) >= 0
+            THEN 1 
+          END) AS Rolling_365_Retained
+  FROM
+    `rare-guide-433209-e6.AdAccounts.Rio_Hubspot_Leads` 
+  GROUP BY 1,2,3,4,5,6
+)
+
+SELECT
+  *
+FROM
+  base_data
+ORDER BY
+  Date
+    );
+  
+2025-03-08 03:03:09.694521 (Thread-3 (worker)): 03:03:09  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:c4b55dc1-a78c-4af3-b5b8-323cf191954d&page=queryresults
+2025-03-08 03:03:49.810413 (Thread-2 (worker)): 03:03:49  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016de6f90>]}
+2025-03-08 03:03:49.811218 (Thread-2 (worker)): 03:03:49  16 of 20 OK created sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google  [[32mCREATE TABLE (158.0 rows, 90.3 MiB processed)[0m in 95.36s]
+2025-03-08 03:03:49.811940 (Thread-2 (worker)): 03:03:49  Finished running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google
+2025-03-08 03:03:49.812668 (Thread-2 (worker)): 03:03:49  Began running node model.marketing_dbt.Rio_YouTubeAds
+2025-03-08 03:03:49.813335 (Thread-2 (worker)): 03:03:49  20 of 20 START sql table model AdAccounts_stg.Rio_YouTubeAds ................... [RUN]
+2025-03-08 03:03:49.813950 (Thread-2 (worker)): 03:03:49  Re-using an available connection from the pool (formerly model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Google, now model.marketing_dbt.Rio_YouTubeAds)
+2025-03-08 03:03:49.814417 (Thread-2 (worker)): 03:03:49  Began compiling node model.marketing_dbt.Rio_YouTubeAds
+2025-03-08 03:03:49.816109 (Thread-2 (worker)): 03:03:49  Writing injected SQL for node "model.marketing_dbt.Rio_YouTubeAds"
+2025-03-08 03:03:49.816786 (Thread-2 (worker)): 03:03:49  Began executing node model.marketing_dbt.Rio_YouTubeAds
+2025-03-08 03:03:49.818072 (Thread-2 (worker)): 03:03:49  Opening a new connection, currently in state closed
+2025-03-08 03:03:50.056804 (Thread-2 (worker)): 03:03:50  Writing runtime sql for node "model.marketing_dbt.Rio_YouTubeAds"
+2025-03-08 03:03:50.057733 (Thread-2 (worker)): 03:03:50  On model.marketing_dbt.Rio_YouTubeAds: /* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_YouTubeAds"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_stg`.`Rio_YouTubeAds`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      
+
+SELECT *
+FROM `rare-guide-433209-e6.AdAccounts.Rio_YouTube_Ads`
+WHERE Date IS NOT NULL
+    );
+  
+2025-03-08 03:03:50.398741 (Thread-2 (worker)): 03:03:50  BigQuery adapter: https://console.cloud.google.com/bigquery?project=rare-guide-433209-e6&j=bq:US:43c4e1cf-e753-44b5-a380-369d0a0a7d57&page=queryresults
+2025-03-08 03:04:42.993178 (Thread-2 (worker)): 03:04:42  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016cbcd90>]}
+2025-03-08 03:04:42.994015 (Thread-2 (worker)): 03:04:42  20 of 20 OK created sql table model AdAccounts_stg.Rio_YouTubeAds .............. [[32mCREATE TABLE (82.0 rows, 8.9 KiB processed)[0m in 53.18s]
+2025-03-08 03:04:42.994763 (Thread-2 (worker)): 03:04:42  Finished running node model.marketing_dbt.Rio_YouTubeAds
+2025-03-08 03:04:47.360711 (Thread-3 (worker)): 03:04:47  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016cb9710>]}
+2025-03-08 03:04:47.361568 (Thread-3 (worker)): 03:04:47  19 of 20 OK created sql table model AdAccounts_mart.Rio_Hubspot_Leads_Campaign_Ads  [[32mCREATE TABLE (15.9k rows, 30.1 MiB processed)[0m in 98.27s]
+2025-03-08 03:04:47.362335 (Thread-3 (worker)): 03:04:47  Finished running node model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads
+2025-03-08 03:05:30.113903 (Thread-4 (worker)): 03:05:30  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016db8ed0>]}
+2025-03-08 03:05:30.114728 (Thread-4 (worker)): 03:05:30  18 of 20 OK created sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube  [[32mCREATE TABLE (207.0 rows, 90.3 MiB processed)[0m in 159.60s]
+2025-03-08 03:05:30.115465 (Thread-4 (worker)): 03:05:30  Finished running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube
+dbt command failed2025-03-08 03:07:43.291324 (Thread-1 (worker)): 03:07:43  BigQuery adapter: Unhandled error while running:
+/* {"app": "dbt", "dbt_version": "2025.3.4+d907f5f", "profile_name": "user", "target_name": "default", "node_id": "model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table"} */
+
+  
+    
+
+    create or replace table `rare-guide-433209-e6`.`AdAccounts_mart`.`Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table`
+      
+    
+    
+
+    OPTIONS()
+    as (
+      -- Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+
+
+
+
+WITH filtered_hubspot_leads AS (
+  SELECT 
+    hl.* EXCEPT (Date, Retained_Date),
+    hl.Date AS Created_Date,
+    hl.Retained_Date
+  FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Hubspot_Leads` AS hl
+  WHERE REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'facebook|google|youtube')
+    AND NOT REGEXP_CONTAINS(LOWER(hl.Source_Traffic), r'organic')
+    AND REGEXP_CONTAINS(LOWER(hl.Case_Profile), r'employment')
+),
+
+date_limits AS (
+  SELECT 
+    MIN(dt) AS start_date,
+    MAX(dt) AS end_date
+  FROM (
+    SELECT Created_Date AS dt FROM filtered_hubspot_leads
+    UNION ALL SELECT Retained_Date FROM filtered_hubspot_leads
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Facebook_Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Google_Ads`
+    UNION ALL SELECT Date FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_YouTube_Ads`
+  )
+),
+
+all_dates AS (
+  SELECT 
+    DATE_ADD(start_date, INTERVAL n DAY) AS Aggregation_Date
+  FROM date_limits, 
+  UNNEST(GENERATE_ARRAY(0, DATE_DIFF(end_date, start_date, DAY))) AS n
+),
+
+ads_costs AS (
+  SELECT 
+    Date AS Aggregation_Date,
+    SUM(Total_Cost) AS Total_Ad_Cost
+  FROM (
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Facebook_Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_Google_Ads`
+    UNION ALL
+    SELECT Date, Total_Cost 
+    FROM `rare-guide-433209-e6`.`AdAccounts`.`Rio_YouTube_Ads`
+  )
+  GROUP BY 1
+),
+
+leads_created_metrics AS (
+  SELECT
+    Created_Date AS Aggregation_Date,
+    COUNT(1) AS Monthly_Leads,
+    COUNTIF(Marketing_Lead_Status = 'qualified') AS Monthly_Qualified_Leads,
+    COUNTIF(
+      Contact_lead_status = 'Retained'
+      AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Created_Date)
+    ) AS In_Period_Retained,
+    COUNTIF(
+      Contact_lead_status = 'Retained' 
+      AND DATE_DIFF(Retained_Date, Created_Date, DAY) BETWEEN -1 AND 61
+    ) AS Rolling_Window_Retained
+  FROM filtered_hubspot_leads
+  GROUP BY 1
+),
+
+leads_retained_metrics AS (
+  SELECT
+    Retained_Date AS Aggregation_Date,
+    COUNT(1) AS Retained_that_Month
+  FROM filtered_hubspot_leads
+  WHERE Contact_lead_status = 'Retained'
+  GROUP BY 1
+),
+
+-- Rest of the model remains identical from base_data onward...
+-- [The rest of the original code remains unchanged]
+
+base_data AS (
+  SELECT
+    ad.Aggregation_Date,
+    COALESCE(lc.Monthly_Leads, 0) AS Monthly_Leads,
+    COALESCE(lc.Monthly_Qualified_Leads, 0) AS Monthly_Qualified_Leads,
+    COALESCE(lc.In_Period_Retained, 0) AS In_Period_Retained,
+    COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
+    COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
+    COALESCE(ac.Total_Ad_Cost, 0) AS Total_Ad_Cost,
+    UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
+  FROM all_dates AS ad
+  LEFT JOIN leads_created_metrics AS lc USING (Aggregation_Date)
+  LEFT JOIN leads_retained_metrics AS lr USING (Aggregation_Date)
+  LEFT JOIN ads_costs AS ac USING (Aggregation_Date)
+),
+
+window_calculations AS (
+  SELECT
+    *,
+    -- Annual calculations
+    SUM(Total_Ad_Cost) OVER annual AS Annual_Ad_Spend,
+    SUM(Monthly_Leads) OVER annual AS Annual_Leads,
+    SUM(Monthly_Qualified_Leads) OVER annual AS Annual_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(Monthly_Qualified_Leads) OVER annual
+    ) AS Annual_CPQL,
+    SUM(Retained_that_Month) OVER annual AS Annual_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER annual,
+      SUM(In_Period_Retained) OVER annual
+    ) AS Annual_CPA,
+
+    -- 60-day rolling calculations
+    SUM(Total_Ad_Cost) OVER rolling_60d AS Rolling_60_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_60d AS Rolling_60_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_60d AS Rolling_60_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_60d
+    ) AS Rolling_60_CPQL,
+    SUM(Retained_that_Month) OVER rolling_60d_retained AS Rolling_60_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_60d,
+      SUM(In_Period_Retained) OVER rolling_60d
+    ) AS Rolling_60_CPA,
+
+    -- 365-day rolling calculations
+    SUM(Total_Ad_Cost) OVER rolling_365d AS Rolling_365_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_365d AS Rolling_365_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_365d AS Rolling_365_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_365d
+    ) AS Rolling_365_CPQL,
+    SUM(Retained_that_Month) OVER rolling_365d_retained AS Rolling_365_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_365d,
+      SUM(In_Period_Retained) OVER rolling_365d
+    ) AS Rolling_365_CPA
+  FROM base_data
+  WINDOW
+    annual AS (
+      PARTITION BY EXTRACT(YEAR FROM Aggregation_Date) 
+      ORDER BY Aggregation_Date
+    ),
+    rolling_60d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
+    ),
+    rolling_60d_retained AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
+    ),
+    rolling_365d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
+    ),
+    rolling_365d_retained AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 365 PRECEDING AND 1 FOLLOWING
+    )
+)
+
+SELECT * EXCEPT (aggregation_date_num)
+FROM window_calculations
+WHERE Aggregation_Date IS NOT NULL
+ORDER BY Aggregation_Date
+    );
+  
+2025-03-08 03:07:43.292311 (Thread-1 (worker)): 03:07:43  BigQuery adapter: Operation did not complete within the designated timeout of 300 seconds.
+2025-03-08 03:07:43.294969 (Thread-1 (worker)): 03:07:43  Database Error in model Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)
+  Operation did not complete within the designated timeout of 300 seconds.
+  compiled code at target/run/marketing_dbt/models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+2025-03-08 03:07:43.295786 (Thread-1 (worker)): 03:07:43  Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '9967043d-6de5-44f5-b9c6-647263fdc323', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee016db3850>]}
+2025-03-08 03:07:43.311794 (Thread-1 (worker)): 03:07:43  An error was encountered while trying to send an event
+2025-03-08 03:07:43.312616 (Thread-1 (worker)): 03:07:43  17 of 20 ERROR creating sql table model AdAccounts_mart.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table  [[31mERROR[0m in 301.77s]
+2025-03-08 03:07:43.313360 (Thread-1 (worker)): 03:07:43  Finished running node model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table
+2025-03-08 03:07:43.314250 (Thread-7 (_handle_results)): 03:07:43  Marking all children of 'model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table' to be skipped because of status 'error'.  Reason: Database Error in model Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)
+  Operation did not complete within the designated timeout of 300 seconds.
+  compiled code at target/run/marketing_dbt/models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql.
+2025-03-08 03:07:43.316061 (MainThread): 03:07:43  Opening a new connection, currently in state closed
+2025-03-08 03:07:43.354458 (MainThread): 03:07:43  Connection 'master' was properly closed.
+2025-03-08 03:07:43.354919 (MainThread): 03:07:43  Connection 'model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table' was properly closed.
+2025-03-08 03:07:43.355322 (MainThread): 03:07:43  Connection 'model.marketing_dbt.Rio_YouTubeAds' was properly closed.
+2025-03-08 03:07:43.355704 (MainThread): 03:07:43  Connection 'model.marketing_dbt.Rio_Hubspot_Leads_Campaign_Ads' was properly closed.
+2025-03-08 03:07:43.356079 (MainThread): 03:07:43  Connection 'model.marketing_dbt.Rio_Hubspot_Leads_AdsAccounts_Consolidated_YouTube' was properly closed.
+2025-03-08 03:07:43.356574 (MainThread): 03:07:43  
+2025-03-08 03:07:43.357018 (MainThread): 03:07:43
+2025-03-08 03:07:43.357018 (MainThread): 03:07:43  Finished running 20 table models in 0 hours 12 minutes and 37.37 seconds (757.37s).
+2025-03-08 03:07:43.359802 (MainThread): 03:07:43
+2025-03-08 03:07:43.359802 (MainThread): 03:07:43  Command end result
+2025-03-08 03:07:43.381734 (MainThread): 03:07:43  Wrote artifact WritableManifest to /tmp/jobs/70471830377930/target/target/manifest.json
+2025-03-08 03:07:43.382995 (MainThread): 03:07:43  Wrote artifact SemanticManifest to /tmp/jobs/70471830377930/target/target/semantic_manifest.json
+2025-03-08 03:07:43.388709 (MainThread): 03:07:43  Wrote artifact RunExecutionResult to /tmp/jobs/70471830377930/target/target/run_results.json
+2025-03-08 03:07:43.389185 (MainThread): 03:07:43  
+2025-03-08 03:07:43.389656 (MainThread): 03:07:43
+2025-03-08 03:07:43.389656 (MainThread): 03:07:43  [31mCompleted with 8 errors, 0 partial successes, and 0 warnings:[0m
+2025-03-08 03:07:43.390072 (MainThread): 03:07:43  
+2025-03-08 03:07:43.390545 (MainThread): 03:07:43
+2025-03-08 03:07:43.390545 (MainThread): 03:07:43  [31mFailure in model Hubspot_Leads_AdsAccounts_Consolidated_TikTok (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql)[0m
+2025-03-08 03:07:43.391046 (MainThread): 03:07:43
+2025-03-08 03:07:43.391046 (MainThread): 03:07:43    Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_TikTok (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql
+2025-03-08 03:07:43.391460 (MainThread): 03:07:43  
+2025-03-08 03:07:43.391848 (MainThread): 03:07:43
+2025-03-08 03:07:43.391848 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_TikTok.sql
+2025-03-08 03:07:43.392244 (MainThread): 03:07:43  
+2025-03-08 03:07:43.392637 (MainThread): 03:07:43
+2025-03-08 03:07:43.392637 (MainThread): 03:07:43  [31mFailure in model Hubspot_Leads_AdsAccounts_Consolidated_Google (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql)[0m
+2025-03-08 03:07:43.393116 (MainThread): 03:07:43
+2025-03-08 03:07:43.393116 (MainThread): 03:07:43    Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Google (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql
+2025-03-08 03:07:43.393737 (MainThread): 03:07:43  
+2025-03-08 03:07:43.394165 (MainThread): 03:07:43
+2025-03-08 03:07:43.394165 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Google.sql
+2025-03-08 03:07:43.394576 (MainThread): 03:07:43  
+2025-03-08 03:07:43.394970 (MainThread): 03:07:43
+2025-03-08 03:07:43.394970 (MainThread): 03:07:43  [31mFailure in model Hubspot_Leads_AdsAccounts_Consolidated_Facebook (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql)[0m
+2025-03-08 03:07:43.395424 (MainThread): 03:07:43
+2025-03-08 03:07:43.395424 (MainThread): 03:07:43    Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Facebook (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql
+2025-03-08 03:07:43.395819 (MainThread): 03:07:43  
+2025-03-08 03:07:43.396199 (MainThread): 03:07:43
+2025-03-08 03:07:43.396199 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Facebook.sql
+2025-03-08 03:07:43.396590 (MainThread): 03:07:43  
+2025-03-08 03:07:43.396995 (MainThread): 03:07:43
+2025-03-08 03:07:43.396995 (MainThread): 03:07:43  [31mFailure in model Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)[0m
+2025-03-08 03:07:43.397450 (MainThread): 03:07:43
+2025-03-08 03:07:43.397450 (MainThread): 03:07:43    Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)
+  Operation did not complete within the designated timeout of 300 seconds.
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+2025-03-08 03:07:43.397888 (MainThread): 03:07:43  
+2025-03-08 03:07:43.398278 (MainThread): 03:07:43
+2025-03-08 03:07:43.398278 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+2025-03-08 03:07:43.398671 (MainThread): 03:07:43  
+2025-03-08 03:07:43.399056 (MainThread): 03:07:43
+2025-03-08 03:07:43.399056 (MainThread): 03:07:43  [31mFailure in model Hubspot_Leads_AdsAccounts_Consolidated_YouTube (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql)[0m
+2025-03-08 03:07:43.399503 (MainThread): 03:07:43
+2025-03-08 03:07:43.399503 (MainThread): 03:07:43    Database Error in model Hubspot_Leads_AdsAccounts_Consolidated_YouTube (models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql
+2025-03-08 03:07:43.399891 (MainThread): 03:07:43  
+2025-03-08 03:07:43.400277 (MainThread): 03:07:43
+2025-03-08 03:07:43.400277 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/mart/Hubspot_Leads_AdsAccounts_Consolidated_YouTube.sql
+2025-03-08 03:07:43.400673 (MainThread): 03:07:43  
+2025-03-08 03:07:43.401075 (MainThread): 03:07:43
+2025-03-08 03:07:43.401075 (MainThread): 03:07:43  [31mFailure in model Hubspot_Leads_Campaign_Ads (models/mart/Hubspot_Leads_Campaign_Ads.sql)[0m
+2025-03-08 03:07:43.401547 (MainThread): 03:07:43
+2025-03-08 03:07:43.401547 (MainThread): 03:07:43    Database Error in model Hubspot_Leads_Campaign_Ads (models/mart/Hubspot_Leads_Campaign_Ads.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/mart/Hubspot_Leads_Campaign_Ads.sql
+2025-03-08 03:07:43.401987 (MainThread): 03:07:43  
+2025-03-08 03:07:43.402377 (MainThread): 03:07:43
+2025-03-08 03:07:43.402377 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/mart/Hubspot_Leads_Campaign_Ads.sql
+2025-03-08 03:07:43.402777 (MainThread): 03:07:43  
+2025-03-08 03:07:43.403157 (MainThread): 03:07:43
+2025-03-08 03:07:43.403157 (MainThread): 03:07:43  [31mFailure in model LLA_FacebookAds (models/stg/LLA_FacebookAds.sql)[0m
+2025-03-08 03:07:43.403592 (MainThread): 03:07:43
+2025-03-08 03:07:43.403592 (MainThread): 03:07:43    Database Error in model LLA_FacebookAds (models/stg/LLA_FacebookAds.sql)
+  Resources exceeded during query execution: Google Sheets service overloaded for spreadsheet id: 1hdcHBLklg1CB4odr93d7839l8GZ1Ls0WpwmEpKukTN0
+  compiled code at target/run/marketing_dbt/models/stg/LLA_FacebookAds.sql
+2025-03-08 03:07:43.403977 (MainThread): 03:07:43  
+2025-03-08 03:07:43.404350 (MainThread): 03:07:43
+2025-03-08 03:07:43.404350 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/stg/LLA_FacebookAds.sql
+2025-03-08 03:07:43.404754 (MainThread): 03:07:43  
+2025-03-08 03:07:43.405147 (MainThread): 03:07:43
+2025-03-08 03:07:43.405147 (MainThread): 03:07:43  [31mFailure in model Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)[0m
+2025-03-08 03:07:43.405629 (MainThread): 03:07:43
+2025-03-08 03:07:43.405629 (MainThread): 03:07:43    Database Error in model Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table (models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql)
+  Operation did not complete within the designated timeout of 300 seconds.
+  compiled code at target/run/marketing_dbt/models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+2025-03-08 03:07:43.406037 (MainThread): 03:07:43  
+2025-03-08 03:07:43.406428 (MainThread): 03:07:43
+2025-03-08 03:07:43.406428 (MainThread): 03:07:43    compiled code at target/compiled/marketing_dbt/models/mart/Rio_Hubspot_Leads_AdsAccounts_Consolidated_Table.sql
+2025-03-08 03:07:43.406845 (MainThread): 03:07:43  
+2025-03-08 03:07:43.407211 (MainThread): 03:07:43
+2025-03-08 03:07:43.407211 (MainThread): 03:07:43  Done. PASS=12 WARN=0 ERROR=8 SKIP=0 NO-OP=0 TOTAL=20
+2025-03-08 03:07:43.408043 (MainThread): 03:07:43  Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 760.00305, "process_in_blocks": "0", "process_kernel_time": 0.600426, "process_mem_max_rss": "263232", "process_out_blocks": "6304", "process_user_time": 6.158387}
+2025-03-08 03:07:43.408530 (MainThread): 03:07:43  Observability Metric: command_success=0.0
+2025-03-08 03:07:43.409068 (MainThread): 03:07:43  Observability Metric: command_wall_clock_time=760.0030517578125
+2025-03-08 03:07:43.409549 (MainThread): 03:07:43  Observability Metric: process_user_time=6.158387184143066
+2025-03-08 03:07:43.410036 (MainThread): 03:07:43  Observability Metric: process_kernel_time=0.6004260182380676
+2025-03-08 03:07:43.410462 (MainThread): 03:07:43  Observability Metric: process_mem_max_rss=263232.0
+2025-03-08 03:07:43.410972 (MainThread): 03:07:43  Command `dbt run` failed at 03:07:43.410889 after 760.00 seconds
+2025-03-08 03:07:43.411445 (MainThread): 03:07:43  Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee069d6c9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee01ec73ed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ee069d17410>]}
