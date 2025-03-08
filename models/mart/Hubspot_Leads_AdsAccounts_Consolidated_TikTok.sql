@@ -56,18 +56,16 @@ tiktok_ads_aggregated AS (
 leads_created_metrics AS (
   SELECT
     Date AS Aggregation_Date,
-    COUNT(CASE WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') THEN 1 END) AS Monthly_Leads,
-    COUNT(CASE WHEN _New__Marketing_Lead_Status = 'Qualified' THEN 1 END) AS Monthly_Qualified_Leads,
-    COUNT(CASE 
-            WHEN Contact_lead_status = 'Retained'
-            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
-            THEN 1 
-          END) AS In_Period_Retained,
-    COUNT(CASE 
-            WHEN Contact_lead_status = 'Retained' 
-            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
-            THEN 1 
-          END) AS Rolling_Window_Retained
+    COUNTIF(Jot_Form_Date IS NULL OR Jot_Form_Date = '') AS Monthly_Leads,
+    COUNTIF(_New__Marketing_Lead_Status = 'Qualified') AS Monthly_Qualified_Leads,
+    COUNTIF(
+      Contact_lead_status = 'Retained'
+      AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date)
+    ) AS In_Period_Retained,
+    COUNTIF(
+      Contact_lead_status = 'Retained' 
+      AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+    ) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
   GROUP BY Date
 ),

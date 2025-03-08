@@ -6,6 +6,7 @@
     )
 }}
 
+
 WITH filtered_hubspot_leads AS (
   SELECT 
     hl.* EXCEPT (Date, Retained_Date),
