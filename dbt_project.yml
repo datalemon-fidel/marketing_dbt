@@ -29,6 +29,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   marketing_dbt:
+    +timeout_seconds: 600  # Increased timeout limit to 10 minutes
     stg:
       +materialized: table
       +schema: stg
