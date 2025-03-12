@@ -249,4 +249,4 @@ SELECT
   Rolling_365_CPA
 FROM aggregated_metrics
 WHERE Aggregation_Date IS NOT NULL
-ORDER BY Aggregation_Date;
+ORDER BY Aggregation_Date
