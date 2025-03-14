@@ -1,8 +1,10 @@
 --Hubspot_Leads_Campaign_Ads.sql
 
-{{ config(
-    materialized='table'  
-) }}
+{{
+    config(
+        materialized='table'  
+    )
+}}
 
 WITH base_data AS (
   SELECT
@@ -19,7 +21,7 @@ WITH base_data AS (
     Source_Adset, 
     Last_Keywords,
     COUNT(CASE 
-            WHEN (Jot_Form_Date IS NULL OR Jot_Form_Date = '') 
+            WHEN (SAFE_CAST(Jot_Form_Date AS DATE) IS NULL) 
                  AND LOWER(Source_Traffic) NOT LIKE '%organic%' 
             THEN 1 
           END) AS Total_Leads,
@@ -31,21 +33,21 @@ WITH base_data AS (
     COUNT(CASE 
             WHEN LOWER(Source_Traffic) NOT LIKE '%organic%' 
                  AND Contact_lead_status = 'Retained'
-                 AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+                 AND FORMAT_DATE('%Y-%m', SAFE_CAST(Retained_Date AS DATE)) = FORMAT_DATE('%Y-%m', Date) 
             THEN 1 
           END) AS Total_Retained,
     COUNT(CASE 
             WHEN LOWER(Source_Traffic) NOT LIKE '%organic%'
                  AND Contact_lead_status = 'Retained' 
-                 AND DATE_DIFF(Retained_Date, Date, DAY) <= 60 
-                 AND DATE_DIFF(Retained_Date, Date, DAY) >= 0
+                 AND DATE_DIFF(SAFE_CAST(Retained_Date AS DATE), Date, DAY) <= 60 
+                 AND DATE_DIFF(SAFE_CAST(Retained_Date AS DATE), Date, DAY) >= 0
             THEN 1 
           END) AS Rolling_60_Retained,
     COUNT(CASE 
             WHEN LOWER(Source_Traffic) NOT LIKE '%organic%'
                  AND Contact_lead_status = 'Retained' 
-                 AND DATE_DIFF(Retained_Date, Date, DAY) <= 365 
-                 AND DATE_DIFF(Retained_Date, Date, DAY) >= 0
+                 AND DATE_DIFF(SAFE_CAST(Retained_Date AS DATE), Date, DAY) <= 365 
+                 AND DATE_DIFF(SAFE_CAST(Retained_Date AS DATE), Date, DAY) >= 0
             THEN 1 
           END) AS Rolling_365_Retained
   FROM

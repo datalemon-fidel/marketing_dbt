@@ -17,7 +17,7 @@ WITH filtered_hubspot_leads AS (
 retained_leads AS (
   SELECT
     Date AS Created_Date,
-    Retained_Date
+    SAFE_CAST(Retained_Date AS DATE) AS Retained_Date
   FROM filtered_hubspot_leads
   WHERE Contact_lead_status = 'Retained'
 ),
@@ -35,7 +35,7 @@ date_scaffold AS (
       MAX(fa.Date)
     ) AS end_date
   FROM filtered_hubspot_leads AS hl
-  CROSS JOIN {{ source('stg', 'LLA_TikTokAds') }} AS fa
+  CROSS JOIN {{ source('stg', 'LLA_GoogleAds') }} AS fa
 ),
 
 all_dates AS (
@@ -49,22 +49,22 @@ tiktok_ads_aggregated AS (
   SELECT
     Date AS Aggregation_Date,
     SUM(Total_Cost) AS TikTokAds_Cost
-  FROM {{ source('stg', 'LLA_TikTokAds') }}
+  FROM {{ source('stg', 'LLA_GoogleAds') }}
   GROUP BY Date
 ),
 
 leads_created_metrics AS (
   SELECT
     Date AS Aggregation_Date,
-    COUNTIF(Jot_Form_Date IS NULL OR Jot_Form_Date = '') AS Monthly_Leads,
+    COUNTIF(SAFE_CAST(Jot_Form_Date AS DATE) IS NULL) AS Monthly_Leads,
     COUNTIF(_New__Marketing_Lead_Status = 'Qualified') AS Monthly_Qualified_Leads,
     COUNTIF(
       Contact_lead_status = 'Retained'
-      AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date)
+      AND FORMAT_DATE('%Y-%m', SAFE_CAST(Retained_Date AS DATE)) = FORMAT_DATE('%Y-%m', Date)
     ) AS In_Period_Retained,
     COUNTIF(
       Contact_lead_status = 'Retained' 
-      AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN -1 AND 61
+      AND DATE_DIFF(SAFE_CAST(Retained_Date AS DATE), Date, DAY) BETWEEN -1 AND 61
     ) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
   GROUP BY Date
@@ -72,7 +72,7 @@ leads_created_metrics AS (
 
 leads_retained_metrics AS (
   SELECT
-    Retained_Date AS Aggregation_Date,
+    SAFE_CAST(Retained_Date AS DATE) AS Aggregation_Date,
     COUNT(1) AS Retained_that_Month
   FROM filtered_hubspot_leads
   WHERE Contact_lead_status = 'Retained'

@@ -18,12 +18,12 @@ date_scaffold AS (
   SELECT 
     LEAST(
       MIN(hl.Date), 
-      MIN(hl.Retained_Date), 
+      MIN(SAFE_CAST(hl.Retained_Date AS DATE)), 
       MIN(fa.Date)
     ) AS start_date,
     GREATEST(
       MAX(hl.Date), 
-      MAX(hl.Retained_Date), 
+      MAX(SAFE_CAST(hl.Retained_Date AS DATE)), 
       MAX(fa.Date)
     ) AS end_date
   FROM filtered_hubspot_leads AS hl
@@ -52,12 +52,12 @@ leads_created_metrics AS (
     COUNT(CASE WHEN Marketing_Lead_Status = 'qualified' THEN 1 END) AS Monthly_Qualified_Leads,  
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained'
-            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
+            AND FORMAT_DATE('%Y-%m', SAFE_CAST(Retained_Date AS DATE)) = FORMAT_DATE('%Y-%m', Date) 
             THEN 1 
           END) AS In_Period_Retained,
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained' 
-            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 59
+            AND DATE_DIFF(SAFE_CAST(Retained_Date AS DATE), Date, DAY) BETWEEN 0 AND 59
             THEN 1 
           END) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
@@ -66,7 +66,7 @@ leads_created_metrics AS (
 
 leads_retained_metrics AS (
   SELECT
-    Retained_Date AS Aggregation_Date,
+    SAFE_CAST(Retained_Date AS DATE) AS Aggregation_Date,
     COUNT(1) AS Retained_that_Month
   FROM filtered_hubspot_leads
   WHERE Contact_lead_status = 'Retained'
