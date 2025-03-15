@@ -6,7 +6,6 @@
     )
 }}
 
-
 WITH filtered_hubspot_leads AS (
   SELECT 
     hl.* EXCEPT (Date, Retained_Date),
@@ -81,9 +80,6 @@ leads_retained_metrics AS (
   GROUP BY 1
 ),
 
--- Rest of the model remains identical from base_data onward...
--- [The rest of the original code remains unchanged]
-
 base_data AS (
   SELECT
     ad.Aggregation_Date,
@@ -131,6 +127,20 @@ window_calculations AS (
       SUM(In_Period_Retained) OVER rolling_60d
     ) AS Rolling_60_CPA,
 
+    -- 90-day rolling calculations
+    SUM(Total_Ad_Cost) OVER rolling_90d AS Rolling_90_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_90d AS Rolling_90_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_90d AS Rolling_90_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_90d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_90d
+    ) AS Rolling_90_CPQL,
+    SUM(Retained_that_Month) OVER rolling_90d_retained AS Rolling_90_Retained,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_90d,
+      SUM(In_Period_Retained) OVER rolling_90d
+    ) AS Rolling_90_CPA,
+
     -- 365-day rolling calculations
     SUM(Total_Ad_Cost) OVER rolling_365d AS Rolling_365_Ad_Spend,
     SUM(Monthly_Leads) OVER rolling_365d AS Rolling_365_Leads,
@@ -158,6 +168,14 @@ window_calculations AS (
       ORDER BY aggregation_date_num
       RANGE BETWEEN 60 PRECEDING AND 1 FOLLOWING
     ),
+    rolling_90d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ),
+    rolling_90d_retained AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 90 PRECEDING AND 1 FOLLOWING
+    ),
     rolling_365d AS (
       ORDER BY aggregation_date_num
       RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
@@ -168,7 +186,38 @@ window_calculations AS (
     )
 )
 
-SELECT * EXCEPT (aggregation_date_num)
+SELECT 
+  Aggregation_Date,
+  Total_Ad_Cost,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Ad_Spend,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_Retained,
+  Rolling_60_CPA,
+  Rolling_90_Ad_Spend,
+  Rolling_90_Leads,
+  Rolling_90_Qualified_Leads,
+  Rolling_90_CPQL,
+  Rolling_90_Retained,
+  Rolling_90_CPA,
+  Rolling_365_Ad_Spend,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_Retained,
+  Rolling_365_CPA,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month
 FROM window_calculations
 WHERE Aggregation_Date IS NOT NULL
 ORDER BY Aggregation_Date
