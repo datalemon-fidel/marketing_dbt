@@ -18,12 +18,12 @@ date_scaffold AS (
   SELECT 
     LEAST(
       MIN(hl.Date), 
-      MIN(SAFE_CAST(hl.Retained_Date AS DATE)), 
+      MIN(hl.Retained_Date), 
       MIN(fa.Date)
     ) AS start_date,
     GREATEST(
       MAX(hl.Date), 
-      MAX(SAFE_CAST(hl.Retained_Date AS DATE)), 
+      MAX(hl.Retained_Date), 
       MAX(fa.Date)
     ) AS end_date
   FROM filtered_hubspot_leads AS hl
@@ -52,12 +52,12 @@ leads_created_metrics AS (
     COUNT(CASE WHEN Marketing_Lead_Status = 'qualified' THEN 1 END) AS Monthly_Qualified_Leads,  
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained'
-            AND FORMAT_DATE('%Y-%m', SAFE_CAST(Retained_Date AS DATE)) = FORMAT_DATE('%Y-%m', Date) 
+            AND FORMAT_DATE('%Y-%m', Retained_Date) = FORMAT_DATE('%Y-%m', Date) 
             THEN 1 
           END) AS In_Period_Retained,
     COUNT(CASE 
             WHEN Contact_lead_status = 'Retained' 
-            AND DATE_DIFF(SAFE_CAST(Retained_Date AS DATE), Date, DAY) BETWEEN 0 AND 59
+            AND DATE_DIFF(Retained_Date, Date, DAY) BETWEEN 0 AND 59
             THEN 1 
           END) AS Rolling_Window_Retained
   FROM filtered_hubspot_leads
@@ -66,7 +66,7 @@ leads_created_metrics AS (
 
 leads_retained_metrics AS (
   SELECT
-    SAFE_CAST(Retained_Date AS DATE) AS Aggregation_Date,
+    Retained_Date AS Aggregation_Date,
     COUNT(1) AS Retained_that_Month
   FROM filtered_hubspot_leads
   WHERE Contact_lead_status = 'Retained'
@@ -162,6 +162,44 @@ aggregated_metrics AS (
       )
     ) AS Rolling_60_CPA,
 
+    -- Rolling 90-Day Metrics
+    SUM(GoogleAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ) AS Rolling_90_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ) AS Rolling_90_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ) AS Rolling_90_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_90_CPQL,
+    SUM(Retained_that_Month) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ) AS Rolling_90_Retained,
+    SAFE_DIVIDE(
+      SUM(GoogleAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_90_CPA,
+
     -- Rolling 365-Day Metrics
     SUM(GoogleAds_Cost) OVER (
       ORDER BY aggregation_date_num
@@ -206,6 +244,7 @@ SELECT
   Aggregation_Date,
   GoogleAds_Cost,
   Rolling_60_Ad_Spend,
+  Rolling_90_Ad_Spend,
   Rolling_365_Ad_Spend,
   Monthly_Leads,
   Monthly_Qualified_Leads,
@@ -223,6 +262,11 @@ SELECT
   Rolling_60_CPQL,
   Rolling_60_Retained,
   Rolling_60_CPA,
+  Rolling_90_Leads,
+  Rolling_90_Qualified_Leads,
+  Rolling_90_CPQL,
+  Rolling_90_Retained,
+  Rolling_90_CPA,
   Rolling_365_Leads,
   Rolling_365_Qualified_Leads,
   Rolling_365_CPQL,

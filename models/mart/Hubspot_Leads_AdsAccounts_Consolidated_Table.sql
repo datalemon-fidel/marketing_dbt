@@ -99,6 +99,10 @@ rolling_retained AS (
       AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
     ) AS Rolling_60_Retained,
     COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 89 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 89 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_90_Retained,
+    COUNTIF(
       rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
       AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
     ) AS Rolling_365_Retained
@@ -117,6 +121,7 @@ base_data AS (
     COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
     COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
     COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
+    COALESCE(rr.Rolling_90_Retained, 0) AS Rolling_90_Retained,
     COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
     COALESCE(ac.Total_Ad_Cost, 0) AS Total_Ad_Cost,
     UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
@@ -159,6 +164,18 @@ window_calculations AS (
       SUM(In_Period_Retained) OVER rolling_60d
     ) AS Rolling_60_CPA,
 
+    SUM(Total_Ad_Cost) OVER rolling_90d AS Rolling_90_Ad_Spend,
+    SUM(Monthly_Leads) OVER rolling_90d AS Rolling_90_Leads,
+    SUM(Monthly_Qualified_Leads) OVER rolling_90d AS Rolling_90_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_90d,
+      SUM(Monthly_Qualified_Leads) OVER rolling_90d
+    ) AS Rolling_90_CPQL,
+    SAFE_DIVIDE(
+      SUM(Total_Ad_Cost) OVER rolling_90d,
+      SUM(In_Period_Retained) OVER rolling_90d
+    ) AS Rolling_90_CPA,
+
     SUM(Total_Ad_Cost) OVER rolling_365d AS Rolling_365_Ad_Spend,
     SUM(Monthly_Leads) OVER rolling_365d AS Rolling_365_Leads,
     SUM(Monthly_Qualified_Leads) OVER rolling_365d AS Rolling_365_Qualified_Leads,
@@ -180,13 +197,48 @@ window_calculations AS (
       ORDER BY aggregation_date_num
       RANGE BETWEEN 59 PRECEDING AND CURRENT ROW
     ),
+    rolling_90d AS (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ),
     rolling_365d AS (
       ORDER BY aggregation_date_num
       RANGE BETWEEN 364 PRECEDING AND CURRENT ROW
     )
 )
 
-SELECT * EXCEPT (aggregation_date_num)
+SELECT 
+  Aggregation_Date,
+  Total_Ad_Cost,
+  Annual_Ad_Spend,
+  Annual_Leads,
+  Annual_Qualified_Leads,
+  Annual_CPQL,
+  Annual_Retained,
+  Annual_CPA,
+  Rolling_60_Ad_Spend,
+  Rolling_60_Leads,
+  Rolling_60_Qualified_Leads,
+  Rolling_60_CPQL,
+  Rolling_60_CPA,
+  Rolling_90_Ad_Spend,
+  Rolling_90_Leads,
+  Rolling_90_Qualified_Leads,
+  Rolling_90_CPQL,
+  Rolling_90_CPA,
+  Rolling_365_Ad_Spend,
+  Rolling_365_Leads,
+  Rolling_365_Qualified_Leads,
+  Rolling_365_CPQL,
+  Rolling_365_CPA,
+  Monthly_Leads,
+  Monthly_Qualified_Leads,
+  In_Period_Retained,
+  Rolling_Window_Retained,
+  Retained_that_Month,
+  Rolling_60_Retained,
+  Rolling_90_Retained,
+  Rolling_365_Retained
 FROM window_calculations
 WHERE Aggregation_Date IS NOT NULL
 ORDER BY Aggregation_Date

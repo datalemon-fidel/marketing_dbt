@@ -86,6 +86,10 @@ rolling_retained AS (
       AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 59 DAY) AND ad.Aggregation_Date
     ) AS Rolling_60_Retained,
     COUNTIF(
+      rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 89 DAY) AND ad.Aggregation_Date
+      AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 89 DAY) AND ad.Aggregation_Date
+    ) AS Rolling_90_Retained,
+    COUNTIF(
       rl.Created_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
       AND rl.Retained_Date BETWEEN DATE_SUB(ad.Aggregation_Date, INTERVAL 364 DAY) AND ad.Aggregation_Date
     ) AS Rolling_365_Retained
@@ -104,6 +108,7 @@ base_data AS (
     COALESCE(lc.Rolling_Window_Retained, 0) AS Rolling_Window_Retained,
     COALESCE(lr.Retained_that_Month, 0) AS Retained_that_Month,
     COALESCE(rr.Rolling_60_Retained, 0) AS Rolling_60_Retained,
+    COALESCE(rr.Rolling_90_Retained, 0) AS Rolling_90_Retained,
     COALESCE(rr.Rolling_365_Retained, 0) AS Rolling_365_Retained,
     COALESCE(fa.FacebookAds_Cost, 0) AS FacebookAds_Cost,
     UNIX_DATE(ad.Aggregation_Date) AS aggregation_date_num
@@ -184,6 +189,40 @@ aggregated_metrics AS (
       )
     ) AS Rolling_60_CPA,
 
+    -- Rolling 90-Day Metrics
+    SUM(FacebookAds_Cost) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ) AS Rolling_90_Ad_Spend,
+    SUM(Monthly_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ) AS Rolling_90_Leads,
+    SUM(Monthly_Qualified_Leads) OVER (
+      ORDER BY aggregation_date_num
+      RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+    ) AS Rolling_90_Qualified_Leads,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      ),
+      SUM(Monthly_Qualified_Leads) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_90_CPQL,
+    SAFE_DIVIDE(
+      SUM(FacebookAds_Cost) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      ),
+      SUM(In_Period_Retained) OVER (
+        ORDER BY aggregation_date_num
+        RANGE BETWEEN 89 PRECEDING AND CURRENT ROW
+      )
+    ) AS Rolling_90_CPA,
+
     -- Rolling 365-Day Metrics
     SUM(FacebookAds_Cost) OVER (
       ORDER BY aggregation_date_num
@@ -224,6 +263,7 @@ SELECT
   Aggregation_Date,
   FacebookAds_Cost,
   Rolling_60_Ad_Spend,
+  Rolling_90_Ad_Spend,
   Rolling_365_Ad_Spend,
   Monthly_Leads,
   Monthly_Qualified_Leads,
@@ -231,6 +271,7 @@ SELECT
   Rolling_Window_Retained,
   Retained_that_Month,
   Rolling_60_Retained,
+  Rolling_90_Retained,
   Rolling_365_Retained,
   Annual_Ad_Spend,
   Annual_Leads,
@@ -242,6 +283,10 @@ SELECT
   Rolling_60_Qualified_Leads,
   Rolling_60_CPQL,
   Rolling_60_CPA,
+  Rolling_90_Leads,
+  Rolling_90_Qualified_Leads,
+  Rolling_90_CPQL,
+  Rolling_90_CPA,
   Rolling_365_Leads,
   Rolling_365_Qualified_Leads,
   Rolling_365_CPQL,
